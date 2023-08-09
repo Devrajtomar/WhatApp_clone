@@ -1,27 +1,150 @@
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400;1,500;1,600;1,700;1,800&display=swap");
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
+* {
+  font-family: "Open Sans";
+  transition: 0.1s;
+  @apply p-0 m-0 transition;
+}
+*::-webkit-scrollbar {
+  @apply hidden;
+}
+body,
+html {
+  @apply h-full w-full;
+}
+.logo {
+  background-image: linear-gradient(to bottom right, #f7f4fc, #363649);
+  @apply font-bold text-3xl text-transparent bg-clip-text font-serif;
+}
+.flexCenter {
+  @apply flex items-center justify-center;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
+input {
+  @apply focus:outline focus:outline-offset-2 focus:outline-gray-800;
+}
+
+.inputForm {
+  @apply appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none;
+}
+.message {
+  @apply text-lg font-bold font-serif text-green-400;
+}
+.err {
+  @apply italic text-lg text-zinc-800 font-medium;
+}
+.errBold {
+  @apply text-lg font-bold mx-1 whitespace-nowrap;
+}
+
+.socialIcon {
+  @apply w-1/2 border rounded-sm  p-2 flex justify-center items-center hover:bg-zinc-400 cursor-pointer transition hover:scale-105;
+}
+.btn {
+  @apply bg-zinc-500 hover:bg-zinc-700 mt-4 text-white font-bold py-2 px-4 rounded focus:outline-none transform transition hover:scale-105 cursor-pointer;
+}
+.btn_ {
+  @apply bg-zinc-500 hover:bg-zinc-700 text-white font-bold focus:outline-none transform transition hover:scale-105;
+}
+.loading {
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+  z-index: 10000;
+  background-color: #c7cdcb7b;
+}
+
+.spinner {
+  border: 8px solid rgba(255, 245, 245, 0.7);
+  border-top: 8px solid #079cff;
+  border-radius: 50%;
+  width: 70px;
+  height: 70px;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
   }
 }
+.loginPage {
+  @apply flex min-h-full flex-col xl:flex-row items-center justify-center py-12 sm:px-6 lg:px-8 xl:px-52 bg-gray-100;
+}
+label {
+  @apply block text-gray-700  font-bold mb-2;
+}
 
-body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+.heading_1 {
+  @apply sm:mx-auto sm:w-full sm:max-w-md font-bold flex justify-center items-center flex-col gap-1 text-2xl md:text-3xl text-black;
+}
+.heading_2 {
+  @apply font-bold text-black text-lg lg:text-xl xl:text-2xl;
+}
+.heading_3 {
+  @apply font-medium text-base md:text-lg text-zinc-800;
+}
+.icon {
+  @apply p-1 rounded-sm bg-white hover:bg-zinc-300 cursor-pointer text-5xl;
+}
+.loginForm {
+  @apply bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 sm:min-w-[500px] min-w-full mt-8 text-xl relative;
+}
+.home {
+  @apply flex justify-center items-center h-full w-full;
+}
+.avatar {
+  @apply w-10 h-10 md:w-14 md:h-14 rounded-full bg-black;
+}
+.SideBar {
+  @apply h-full fixed md:relative top-0 left-0 flex gap-0.5 justify-start items-start  bg-zinc-400 w-full sm:min-w-[350px] lg:w-2/3 overflow-y-scroll z-[10000000];
+}
+.sidebar_icons {
+  @apply md:w-fit w-full bg-white h-fit md:min-h-screen fixed top-0 left-0 flex items-center md:pb-4 justify-evenly md:justify-between md:flex-col text-lg font-semibold;
+}
+.SideBar_icons {
+  @apply md:w-fit w-full px-1 bg-white h-fit mt-3 md:mt-0 flex justify-evenly md:justify-start md:flex-col gap-2 font-semibold mb-1;
+}
+.page {
+  @apply fixed md:relative right-0 top-0 w-full h-full z-10 p-2;
+}
+.page_icons {
+  @apply flex justify-center items-center py-1 px-2 md:py-1 md:px-0 gap-1 rounded-md flex-row md:flex-col bg-white text-black hover:bg-black hover:text-white cursor-pointer;
+}
+.selected_Icon {
+  @apply flex justify-center items-center py-1 px-2 md:p-1 gap-1 rounded-md flex-row md:flex-col bg-black text-white hover:bg-black hover:text-white cursor-pointer;
+}
+
+.SideBar_Menu {
+  @apply md:pl-20  pt-20 md:pt-2 flex flex-col justify-start items-end w-full;
+}
+.users {
+  @apply flex flex-col gap-3 items-end sm:items-start justify-start pt-2 p-1 sm:px-2 w-full min-w-[350px];
+}
+.user {
+  @apply p-2 bg-gray-100  rounded-full w-[95%] sm:w-full hover:bg-zinc-600 cursor-pointer flex items-center justify-between gap-2;
+}
+.recieve {
+  @apply mr-auto min-w-[50px] flex gap-2 items-center;
+}
+.send {
+  @apply ml-auto min-w-[50px] flex gap-2 items-center;
+}
+.message_ {
+  @apply px-2 rounded-full font-serif font-medium my-2;
+}
+.time {
+  @apply font-mono uppercase text-zinc-700 scale-y-95;
 }
