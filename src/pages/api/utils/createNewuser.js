@@ -3,28 +3,29 @@
 import bcrypt from "bcrypt";
 import prisma from "../../../lib/prismaDB";
 import jwt from "jsonwebtoken";
-const createNewuser = async (name, email, password) => {
-  let res = { name, email, password };
+const createNewuser = async (Name, Email, Password) => {
+  let res = { Name, Email, Password };
   try {
     const isUser = await prisma.user.findUnique({
       where: {
-        email: email,
+        Email: Email,
       },
     });
     if (isUser) {
       return (res = { user: true });
     } else {
-      const hashedPassword = await bcrypt.hash(password, 10);
+      const hashedPassword = await bcrypt.hash(Password, 10);
 
       const newUser = await prisma.user.create({
         data: {
-          name: String(name),
-          email: String(email),
-          hashedPassword: String(hashedPassword), // Store the hashed password in the database
+          Name: String(Name),
+          Email: String(Email),
+          hashedPassword: String(hashedPassword), // Store the hashed Password in the database
         },
       });
       if (newUser) {
-        const token = jwt.sign({ email, password }, password, {
+        const KEY = process.env.SECRET_KEY;
+        const token = jwt.sign({ Email, KEY }, KEY, {
           expiresIn: "24h",
         });
         return (res = { success: true, token: token });
@@ -43,8 +44,9 @@ const createNewuser = async (name, email, password) => {
         },
       },
     });
+    console.log("Created message:", newMessage);
   } catch (error) {
-    res = { error };
+    res = { error: error };
     console.error("Error:", error);
   } finally {
     await prisma.$disconnect(); // Disconnect the Prisma Client

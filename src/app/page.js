@@ -5,20 +5,22 @@ import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { toast } from "react-hot-toast";
 
-import Loading from "../containers/Loading";
+import { SideBar } from "../components/navigation";
+import { ChatSpace, CallsSpace, Stories } from "../components/main";
+import { Loading } from "../containers";
+import { state } from "@/context/store";
 
 const Page = () => {
+  const { setUserEmail } = state();
+
+  const [selectedTab, setSelectedTab] = useState("Chat");
   const router = useRouter();
-  const [data, setData] = useState(null);
+  const [data, setData] = useState(null); // Add a state to store the fetched data
 
   let token = "";
   if (typeof window !== "undefined") {
     token = window.localStorage.getItem("token");
   }
-  const LogOut = () => {
-    window.localStorage.removeItem("token");
-    router.refresh();
-  };
   useEffect(() => {
     if (token === null || token === "") {
       return router.push("/login");
@@ -26,15 +28,10 @@ const Page = () => {
     if (token) {
       const fetchData = async () => {
         try {
-          const res = await axios.post("/api/token", { token });
-          const data_ = res.data;
-
-          if (data_) {
-            const user = await axios.post("/api/user", { data_ });
-            const data = user.data;
-
-            setData(data);
-          }
+          const user = await axios.post("/api/user", { token });
+          const data = user.data;
+          setData(data);
+          setUserEmail(data.Email);
         } catch (error) {
           console.error("Error fetching data:", error);
           router.push("/login");
@@ -55,12 +52,11 @@ const Page = () => {
     return <Loading />;
   }
   return (
-    <div className="home flex-col font-bold uppercase">
-      <div>Home</div>
-      <div>{data.name}</div>
-      <pre className="btn" onClick={LogOut}>
-        Log Out
-      </pre>
+    <div className="home">
+      <SideBar setSelectedTab={setSelectedTab} selectedTab={selectedTab} />
+      {selectedTab === "Chat" && <ChatSpace User={{ chats: [] }} />}
+      {selectedTab === "Stories" && <Stories User={{}} />}
+      {selectedTab === "Calls" && <CallsSpace User={{}} />}
     </div>
   );
 };

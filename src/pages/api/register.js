@@ -26,7 +26,7 @@ const handler = async (req, res) => {
           .json({ error: "Name and Email must not be empty." });
       }
 
-      // You can also implement more rigorous validation for email and password format here.
+      // You can also implement more rigorous validation for Email and Password format here.
 
       // Register the new user
       const response = await createNewuser(trimmedName, trimmedEmail, Password);

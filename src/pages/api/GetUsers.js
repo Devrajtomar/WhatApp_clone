@@ -1,24 +1,30 @@
 import prisma from "../../lib/prismaDB";
+import bodyParser from "body-parser";
+
+const jsonParser = bodyParser.json();
 
 const handler = async (req, res) => {
-  const { email } = req.body;
-  try {
-    const users = await prisma.user.findMany({
-      where: {
-        NOT: {
-          email: email,
+  jsonParser(req, res, async () => {
+    const { email } = req.headers;
+    console.log(email);
+    try {
+      const users = await prisma.user.findMany({
+        where: {
+          NOT: {
+            Email: email,
+          },
         },
-      },
-      select: {
-        id: true,
-        name: true,
-        image: true,
-        updatedAt: true,
-      },
-    });
-    res.send(users);
-  } catch (err) {
-    res.send([]);
-  }
+        select: {
+          id: true,
+          Name: true,
+          image: true,
+          updatedAt: true,
+        },
+      });
+      res.send(users);
+    } catch (err) {
+      res.send([]);
+    }
+  });
 };
 export default handler;

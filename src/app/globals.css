@@ -7,7 +7,7 @@
 * {
   font-family: "Open Sans";
   transition: 0.1s;
-  @apply p-0 m-0 transition;
+  @apply p-0 m-0 transition select-none;
 }
 *::-webkit-scrollbar {
   @apply hidden;
@@ -44,8 +44,18 @@ input {
 .socialIcon {
   @apply w-1/2 border rounded-sm  p-2 flex justify-center items-center hover:bg-zinc-400 cursor-pointer transition hover:scale-105;
 }
+.bg-gradient {
+  background-image: linear-gradient(to bottom right, #f7f4fc, #363649);
+}
+.text-gradient {
+  background-image: linear-gradient(to bottom right, #f7f4fc, #363649);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -moz-background-clip: text;
+  color: transparent;
+}
 .btn {
-  @apply bg-zinc-500 hover:bg-zinc-700 mt-4 text-white font-bold py-2 px-4 rounded focus:outline-none transform transition hover:scale-105 cursor-pointer;
+  @apply bg-zinc-500 hover:bg-zinc-700 text-white font-bold py-2 px-4 rounded focus:outline-none transform transition hover:scale-105 cursor-pointer;
 }
 .btn_ {
   @apply bg-zinc-500 hover:bg-zinc-700 text-white font-bold focus:outline-none transform transition hover:scale-105;
@@ -128,7 +138,7 @@ label {
 }
 
 .SideBar_Menu {
-  @apply md:pl-20  pt-20 md:pt-2 flex flex-col justify-start items-end w-full;
+  @apply md:pl-20  pt-20 md:pt-2 flex flex-col justify-start items-end w-full h-full;
 }
 .users {
   @apply flex flex-col gap-3 items-end sm:items-start justify-start pt-2 p-1 sm:px-2 w-full min-w-[350px];

@@ -1,22 +1,32 @@
 // pages/api/register.js
 import bodyParser from "body-parser";
 import prisma from "../../lib/prismaDB";
+import jwt from "jsonwebtoken";
 // Create middleware instance
 const jsonParser = bodyParser.json();
 
 const handler = (req, res) => {
   if (req.method === "POST") {
     jsonParser(req, res, async () => {
-      const { data_ } = req.body;
-      const response = await prisma.user.findUnique({
-        where: {
-          email: String(data_),
-        },
-      });
-      res.send(response);
+      const { token } = req.body;
+
+      const response = await jwt.decode(token);
+
+      if (response) {
+        if (response.KEY === process.env.SECRET_KEY) {
+          const data = await prisma.user.findUnique({
+            where: {
+              Email: String(response.Email),
+            },
+          });
+          res.send(data);
+        } else {
+          res.status(405).json({ message: "Unathorized" });
+        }
+      }
     });
   } else {
-    res.status(405).json({ message: "Method not allowed" });
+    res.status(404).json({ message: "Path not Found" });
   }
 };
 

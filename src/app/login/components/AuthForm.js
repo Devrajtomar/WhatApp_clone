@@ -2,7 +2,7 @@ import axios from "axios";
 import React, { useState } from "react";
 import { toast } from "react-hot-toast";
 import SocialIcons from "./SocialIcons";
-import Loading from "../../../containers/Loading";
+import { Loading } from "../../../containers";
 import { useRouter } from "next/navigation";
 
 const AuthForm = ({ varient, setVarient }) => {
@@ -100,43 +100,43 @@ const AuthForm = ({ varient, setVarient }) => {
       <form onSubmit={(e) => handleSubmit(e)}>
         {varient === "Register" && (
           <div className="mb-4 ">
-            <label htmlFor="name">Name</label>
+            <label htmlFor="Name">Name</label>
             <input
               autoComplete="off"
               className="inputForm"
-              id="name"
+              id="Name"
               type="text"
               value={Name}
               onChange={(e) => setName(e.target.value)}
-              placeholder="Enter your name"
+              placeholder="Enter your Name"
             />
           </div>
         )}
         <div className="mb-4">
-          <label htmlFor="email">Email</label>
+          <label htmlFor="Email">Email</label>
           <input
             className="inputForm"
-            id="email"
-            type="email"
+            id="Email"
+            type="Email"
             autoComplete="off"
             value={Email}
             onChange={(e) => setEmail(e.target.value)}
-            placeholder="Enter your email"
+            placeholder="Enter your Email"
           />
         </div>
         <div className="mb-4">
-          <label htmlFor="password">Password</label>
+          <label htmlFor="Password">Password</label>
           <input
             autoComplete="off"
             className="inputForm"
-            id="password"
-            type="password"
+            id="Password"
+            type="Password"
             value={Password}
             onChange={(e) => setPassword(e.target.value)}
-            placeholder="Enter your password"
+            placeholder="Enter your Password"
           />
         </div>
-        <button className="btn w-full" type="submit">
+        <button className="btn w-full mt-4" type="submit">
           {varient === "Sign In" ? "Sign In" : "Create New Account"}
         </button>
       </form>

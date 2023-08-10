@@ -3,7 +3,6 @@ import bodyParser from "body-parser";
 import bcrypt from "bcrypt";
 import prisma from "../../lib/prismaDB";
 import jwt from "jsonwebtoken";
-// Create middleware instance
 const jsonParser = bodyParser.json();
 
 const login = (req, res) => {
@@ -13,18 +12,19 @@ const login = (req, res) => {
       try {
         const User = await prisma.user.findUnique({
           where: {
-            email: String(Email),
+            Email: String(Email),
           },
         });
         if (User) {
           const compare = await bcrypt.compare(Password, User.hashedPassword);
           if (compare) {
-            const token = jwt.sign({ Email, Password }, Password, {
+            const KEY = process.env.SECRET_KEY;
+            const token = jwt.sign({ Email, KEY }, KEY, {
               expiresIn: "24h",
             });
             res.send({
               Found: true,
-              message: `WELCOME BACK ${User.name.toUpperCase()}!`,
+              message: `WELCOME BACK ${User.Name.toUpperCase()}!`,
               token: token,
             });
           } else {
@@ -36,7 +36,7 @@ const login = (req, res) => {
       } catch (err) {
         res.status(404).json({
           Found: false,
-          err: err,
+          err: req.body,
           message: "user not found",
         });
       }

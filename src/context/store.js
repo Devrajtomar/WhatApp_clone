@@ -1,5 +1,18 @@
-import { proxy } from "valtio";
+import { create } from "zustand";
 
-const state = proxy({
-  isOpen: false,
-});
+export const state = create((set) => ({
+  userEmail: "",
+  setUserEmail: (value) =>
+    set({
+      userEmail: value,
+    }),
+  isOpen: true,
+  setIsOpen: (value) => set(() => ({ isOpen: value })),
+  addFriends: false,
+  setAddFriends: (value) =>
+    set(() => ({
+      addFriends: value,
+    })),
+  currentChatUser: "",
+  setUser: (value) => set(() => ({ currentChatUser: value })),
+}));

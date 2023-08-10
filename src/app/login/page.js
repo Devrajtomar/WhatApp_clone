@@ -1,7 +1,7 @@
 "use client";
 
 import { AuthForm } from "./components";
-import Logo from "../../containers/Logo";
+import { Logo } from "../../containers";
 import React, { useState } from "react";
 const Login = () => {
   const [varient, setVarient] = useState("Sign In");
