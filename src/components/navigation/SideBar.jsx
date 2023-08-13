@@ -5,11 +5,12 @@ import { AiFillPlaySquare } from "react-icons/ai";
 import Image from "next/image";
 import { HiChatBubbleBottomCenter, HiPhone } from "react-icons/hi2";
 
-import { LogOut } from "./";
-import { Chats, Stories, Calls } from "../users";
+import { LogOut } from ".";
+import { Chats, Stories, Calls, AddFriends, AllFriends } from "../users";
 import { state } from "../../context/store";
 const SideBar = ({ selectedTab, setSelectedTab }) => {
-  const { isOpen, setIsOpen } = state();
+  const { isOpen, setIsOpen, Friends, addFriends } = state();
+
   if (isOpen) {
     return (
       <div className="SideBar">
@@ -78,7 +79,6 @@ const SideBar = ({ selectedTab, setSelectedTab }) => {
             <Image
               width={7000}
               height={7000}
-              objectFit="cover"
               alt="Default"
               className="rounded-full h-[60px] w-[60px] m-1 hidden sm:block"
               src="/DefaultUser.jpg"
@@ -87,7 +87,13 @@ const SideBar = ({ selectedTab, setSelectedTab }) => {
         </div>
         <div className="SideBar_Menu">
           <hr className="w-screen md:hidden" />
-          {selectedTab === "Chat" && <Chats />}
+          {selectedTab === "Chat" && (
+            <div className="w-full h-full">
+              {addFriends && <AddFriends />}
+              {Friends && <AllFriends />}
+              {!addFriends && !Friends && <Chats />}
+            </div>
+          )}
           {selectedTab === "Stories" && <Stories />}
           {selectedTab === "Calls" && <Calls />}
         </div>

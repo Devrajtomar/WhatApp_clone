@@ -6,7 +6,6 @@ const jsonParser = bodyParser.json();
 const handler = async (req, res) => {
   jsonParser(req, res, async () => {
     const { email } = req.headers;
-    console.log(email);
     try {
       const users = await prisma.user.findMany({
         where: {

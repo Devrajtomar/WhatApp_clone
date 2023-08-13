@@ -4,7 +4,6 @@ import { BsGithub, BsGoogle } from "react-icons/bs";
 const SocialIcons = () => {
   const GithubLogin = async () => {
     const res = await axios.post("/api/github/login");
-    console.log(res);
   };
   const GoogleLogin = () => {};
   return (

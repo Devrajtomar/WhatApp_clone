@@ -27,6 +27,14 @@ const login = (req, res) => {
               message: `WELCOME BACK ${User.Name.toUpperCase()}!`,
               token: token,
             });
+            await prisma.user.update({
+              where: {
+                Email: String(Email),
+              },
+              data: {
+                updatedAt: new Date(),
+              },
+            });
           } else {
             res.send({ Found: false, message: "Invalid Password" });
           }

@@ -20,7 +20,7 @@ const createNewuser = async (Name, Email, Password) => {
         data: {
           Name: String(Name),
           Email: String(Email),
-          hashedPassword: String(hashedPassword), // Store the hashed Password in the database
+          hashedPassword: String(hashedPassword),
         },
       });
       if (newUser) {
@@ -31,25 +31,11 @@ const createNewuser = async (Name, Email, Password) => {
         return (res = { success: true, token: token });
       }
     }
-
-    // Create a message
-    const newMessage = await prisma.message.create({
-      data: {
-        content: "Hello there!",
-        sender: {
-          connect: { id: newUser.id }, // Connect the message to the newly created user
-        },
-        receiver: {
-          connect: { id: newUser.id }, // Connect the message to the same user as the receiver
-        },
-      },
-    });
-    console.log("Created message:", newMessage);
   } catch (error) {
     res = { error: error };
     console.error("Error:", error);
   } finally {
-    await prisma.$disconnect(); // Disconnect the Prisma Client
+    await prisma.$disconnect();
   }
   return res;
 };

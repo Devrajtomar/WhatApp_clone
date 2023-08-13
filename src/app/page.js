@@ -11,8 +11,7 @@ import { Loading } from "../containers";
 import { state } from "@/context/store";
 
 const Page = () => {
-  const { setUserEmail } = state();
-
+  const { setUser } = state();
   const [selectedTab, setSelectedTab] = useState("Chat");
   const router = useRouter();
   const [data, setData] = useState(null); // Add a state to store the fetched data
@@ -31,7 +30,7 @@ const Page = () => {
           const user = await axios.post("/api/user", { token });
           const data = user.data;
           setData(data);
-          setUserEmail(data.Email);
+          setUser(data);
         } catch (error) {
           console.error("Error fetching data:", error);
           router.push("/login");
