@@ -81,7 +81,7 @@ const ChatSpace = () => {
       <div className="bg-gradient w-full text-white z-20 p-2 flex justify-start items-center gap-2 ">
         <HiArrowLeft
           size={40}
-          className="cursor-pointer hover:scale-105"
+          className="cursor-pointer hover:scale-105 md:hidden"
           onClick={() => setIsOpen(true)}
         />
         <Image
