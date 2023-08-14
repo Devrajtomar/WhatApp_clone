@@ -1,15 +1,34 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import { HiChatAlt2 } from "react-icons/hi";
 import { state } from "../../context/store";
 import { format } from "date-fns";
+import { PusherCl } from "@/lib/pusher";
 
 const Chat = ({ conversation }) => {
+  const [lastMessage, setLastMessage] = useState(
+    conversation.messages[conversation.messages.length - 1],
+  );
   const { user, setChatUser, setIsOpen } = state();
-  const lastMessage = conversation.messages[conversation.messages.length - 1];
+  console.log(conversation);
+  console.log(lastMessage);
   const users = conversation.users.filter((user_) => user_.id !== user.id);
   const name = users.length >= 2 ? conversation.name : users[0].Name;
   const image = users.length > 1 ? conversation.image : users[0].image;
+  useEffect(async () => {
+    PusherCl.subscribe(conversation.id);
+    PusherCl.bind("message:new", (message) => {
+      console.log(message);
+      return setLastMessage(message);
+    });
+    return () => {
+      PusherCl.unsubscribe(conversation.id);
+      PusherCl.unbind("message:new", (message) => {
+        console.log(message);
+        return setLastMessage(message);
+      });
+    };
+  }, [conversation.id]);
   return (
     <div
       className="user"
@@ -29,7 +48,7 @@ const Chat = ({ conversation }) => {
         <h3 className="text-base md:text-lg heading_2">{name}</h3>
         <div className="m-0 flex justify-start items-center gap-1 w-full whitespace-nowrap text-ellipsis overflow-hidden">
           <pre className="heading_3 text-sm md:text-base">
-            {format(new Date(lastMessage.createdAt), "p")}:
+            {format(new Date(lastMessage?.createdAt), "p")}:
           </pre>
           <pre className="heading_3 text-sm md:text-base text-ellipsis font-serif m-0">
             {lastMessage.body}

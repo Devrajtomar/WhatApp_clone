@@ -9,20 +9,24 @@ const Chats = () => {
   const [conversations, setConversations] = useState([]);
   const { user, setFriends } = state();
   const getChats = async () => {
-    const newConversations = await Promise.all(
-      user.conversationIds.map(async (id) => {
+    if (user.conversationIds.length !== 0) {
+      user.conversationIds.forEach(async (id) => {
         const res = await axios.post("/api/conversations/allChats", {
           id: id,
         });
-        return res.data.conversation || null;
-      }),
-    );
-    setConversations(newConversations.filter((conversation) => conversation));
+        if (res.status === 200) {
+          if (res.data.conversation.messages.length !== 0) {
+            return conversations.push(res.data.conversation);
+          }
+        }
+      });
+    }
   };
 
   useEffect(() => {
     getChats();
   }, []);
+  console.log(conversations);
   return (
     <div className="w-full h-full flex justify-start flex-col items-start gap-2 relative overflow-y-scroll">
       {conversations.length === 0 && (

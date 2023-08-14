@@ -18,7 +18,10 @@ const AllFriends = () => {
           <HiUserAdd
             className="btn w-fit"
             size={32}
-            onClick={() => setAddFriends(true)}
+            onClick={() => {
+              setAddFriends(true);
+              setFriends(false);
+            }}
           />
         </div>
       </div>

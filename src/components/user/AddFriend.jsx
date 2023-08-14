@@ -40,7 +40,6 @@ const AddFriend = ({ userData }) => {
       <Image
         width={500}
         height={500}
-        objectFit="cover"
         alt="Default"
         className="rounded-full h-[60px] w-[60px]"
         src={user.image === null ? "/DefaultUser.jpg" : user.image}

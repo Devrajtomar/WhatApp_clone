@@ -1,4 +1,5 @@
 import prisma from "../../../lib/prismaDB";
+import { PusherSr } from "../../../lib/pusher";
 
 const handler = async (req, res) => {
   if (req.method === "POST") {
@@ -43,7 +44,14 @@ const handler = async (req, res) => {
           },
         },
         include: {
-          users: true,
+          users: {
+            select: {
+              id: true,
+              Name: true,
+              image: true,
+              updatedAt: true,
+            },
+          },
           messages: {
             include: {
               seen: true,
@@ -53,6 +61,7 @@ const handler = async (req, res) => {
       });
 
       res.send("message has been send!");
+      await PusherSr.trigger(conversationId, "message:new", newMessage);
     } catch (err) {
       res.send(err);
     }

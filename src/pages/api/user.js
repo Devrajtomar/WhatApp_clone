@@ -18,6 +18,19 @@ const handler = (req, res) => {
             where: {
               Email: String(response.Email),
             },
+            select: {
+              id: true,
+              Email: true,
+              Name: true,
+              image: true,
+              seenMessageIds: true,
+              seenMessages: true,
+              conversationIds: true,
+              conversations: true,
+              messages: true,
+              updatedAt: true,
+              createdAt: true,
+            },
           });
           res.send(data);
         } else {

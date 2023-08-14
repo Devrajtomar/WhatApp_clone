@@ -9,7 +9,14 @@ const handler = async (req, res) => {
           id: id,
         },
         include: {
-          users: true,
+          users: {
+            select: {
+              id: true,
+              Name: true,
+              image: true,
+              updatedAt: true,
+            },
+          },
           messages: true,
         },
       });

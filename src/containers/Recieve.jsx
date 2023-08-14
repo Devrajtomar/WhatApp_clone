@@ -4,7 +4,7 @@ import { format } from "date-fns";
 const Recieve = ({ message }) => {
   return (
     <div className="recieve">
-      <div className="flex items-center justify-center w-10 h-10 rounded-t-full rounded-l-full -rotate-45 bg-green-300 mr-2">
+      <div className="flex items-center justify-center w-10 h-10 rounded-t-full rounded-l-full -rotate-45 bg-green-300">
         <Image
           width={5000}
           height={5000}

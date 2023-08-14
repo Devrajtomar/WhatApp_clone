@@ -1,4 +1,3 @@
-// pages/api/register.js
 import bodyParser from "body-parser";
 import bcrypt from "bcrypt";
 import prisma from "../../lib/prismaDB";

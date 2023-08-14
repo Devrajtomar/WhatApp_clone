@@ -22,7 +22,14 @@ const handler = async (req, res) => {
           ],
         },
         include: {
-          users: true,
+          users: {
+            select: {
+              id: true,
+              Name: true,
+              image: true,
+              updatedAt: true,
+            },
+          },
           messages: true,
         },
       });

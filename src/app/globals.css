@@ -148,10 +148,10 @@ label {
   @apply p-2 bg-gray-100  rounded-full w-[95%] sm:w-full hover:bg-zinc-300 cursor-pointer flex items-center justify-between gap-2;
 }
 .recieve {
-  @apply mr-auto min-w-[50px] flex gap-2 items-center;
+  @apply w-[98%] flex gap-2 items-center justify-start;
 }
 .send {
-  @apply ml-auto min-w-[50px] flex gap-2 items-center;
+  @apply w-[99%] flex gap-2 items-center justify-end;
 }
 .message_ {
   @apply rounded-full font-serif font-medium my-2 px-4 py-1;
