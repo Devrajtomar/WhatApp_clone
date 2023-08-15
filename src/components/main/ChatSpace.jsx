@@ -33,13 +33,20 @@ const ChatSpace = () => {
       }
     }
   };
+  const hendleNewMessage = (message) => {
+    setConversation((current) => [...current, message]);
+    getConversation();
+  };
+
   useEffect(() => {
     getConversation();
+  }, [currentChatUser]);
+  useEffect(() => {
     PusherCl.subscribe(conversationId);
-    PusherCl.bind("message:new", getConversation);
+    PusherCl.bind("message:new", hendleNewMessage);
 
     return () => {
-      PusherCl.unbind("message:new", getConversation);
+      PusherCl.unbind("message:new", hendleNewMessage);
       PusherCl.unsubscribe(conversationId);
     };
   }, [currentChatUser, conversationId]);

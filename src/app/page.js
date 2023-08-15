@@ -14,7 +14,7 @@ const Page = () => {
   const { setUser } = state();
   const [selectedTab, setSelectedTab] = useState("Chat");
   const router = useRouter();
-  const [data, setData] = useState(null); // Add a state to store the fetched data
+  const [data, setData] = useState(null);
 
   let token = "";
   if (typeof window !== "undefined") {
@@ -29,6 +29,7 @@ const Page = () => {
         try {
           const user = await axios.post("/api/user", { token });
           const data = user.data;
+
           setData(data);
           setUser(data);
         } catch (error) {

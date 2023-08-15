@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { modal, state } from "@/context/store";
 import { HiChatBubbleLeft } from "react-icons/hi2";
 import { Chat } from "../user";
@@ -6,7 +6,7 @@ import axios from "axios";
 import { AiOutlineUsergroupAdd } from "react-icons/ai";
 
 const Chats = () => {
-  const conversations = [];
+  const [conversations, setConversations] = useState([]);
   const { setNewGroup } = modal();
   const { user, setFriends } = state();
   const getChats = async () => {
@@ -19,9 +19,13 @@ const Chats = () => {
         if (
           res.status === 200 &&
           res.data.conversation.messages.length !== 0 &&
-          !conversations.includes(res.data.conversation.id)
+          conversations.includes(res.data.conversation)
         ) {
-          return conversations.push(res.data.conversation);
+          console.log(conversations.includes(res.data.conversation));
+          return setConversations((current) => [
+            ...current,
+            res.data.conversation,
+          ]);
         }
       });
     }
@@ -30,7 +34,6 @@ const Chats = () => {
   useEffect(() => {
     getChats();
   }, [user]);
-  console.log(conversations);
   return (
     <div className="w-full h-full flex justify-start flex-col items-start gap-2 relative overflow-y-scroll">
       <div className="w-full h-fit flex justify-between items-center p-2">
