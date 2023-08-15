@@ -1,64 +1,43 @@
 import React, { useEffect, useState } from "react";
-import Image from "next/image";
 import { HiChatAlt2 } from "react-icons/hi";
-import { state } from "../../context/store";
-import { format } from "date-fns";
+import { state } from "@/context/store";
 import { PusherCl } from "@/lib/pusher";
+import { User } from "@/containers";
 
 const Chat = ({ conversation }) => {
-  const [lastMessage, setLastMessage] = useState(
-    conversation.messages[conversation.messages.length - 1],
-  );
+  const messages = conversation.messages;
   const { user, setChatUser, setIsOpen } = state();
-  console.log(conversation);
-  console.log(lastMessage);
+  const [lastMessage, setLastMessage] = useState(messages[messages.length - 1]);
+  const isOwn = lastMessage.senderId === user.id ? true : false;
   const users = conversation.users.filter((user_) => user_.id !== user.id);
   const name = users.length >= 2 ? conversation.name : users[0].Name;
   const image = users.length > 1 ? conversation.image : users[0].image;
-  useEffect(async () => {
+  useEffect(() => {
     PusherCl.subscribe(conversation.id);
-    PusherCl.bind("message:new", (message) => {
-      console.log(message);
-      return setLastMessage(message);
-    });
+    PusherCl.bind("message:new", (message) => setLastMessage(message));
     return () => {
       PusherCl.unsubscribe(conversation.id);
-      PusherCl.unbind("message:new", (message) => {
-        console.log(message);
-        return setLastMessage(message);
-      });
+      PusherCl.unbind("message:new", (message) => setLastMessage(message));
     };
-  }, [conversation.id]);
+  }, [lastMessage]);
+  const NameClick = () => {
+    setIsOpen(window.innerWidth <= 800 ? false : true);
+    setChatUser(users.length > 1 ? conversation : users[0]);
+  };
+  const IconClick = () => {
+    setIsOpen(false);
+    setChatUser(users.length > 1 ? conversation : users[0]);
+  };
   return (
-    <div
-      className="user"
-      onClick={() => {
-        setIsOpen(window.innerWidth <= 800 ? false : true);
-        setChatUser(users.length > 1 ? conversation : users[0]);
-      }}
-    >
-      <Image
-        width={60}
-        height={60}
-        alt="Default"
-        className="rounded-full h-[60px] w-[60px]"
-        src={image ? image : "/DefaultUser.jpg"}
-      />
-      <div className="w-full">
-        <h3 className="text-base md:text-lg heading_2">{name}</h3>
-        <div className="m-0 flex justify-start items-center gap-1 w-full whitespace-nowrap text-ellipsis overflow-hidden">
-          <pre className="heading_3 text-sm md:text-base">
-            {format(new Date(lastMessage?.createdAt), "p")}:
-          </pre>
-          <pre className="heading_3 text-sm md:text-base text-ellipsis font-serif m-0">
-            {lastMessage.body}
-          </pre>
-        </div>
-      </div>
-      <HiChatAlt2
-        className="hover:bg-zinc-100 rounded-full p-1 mr-2"
-        style={{ width: "4rem", height: "2.5rem" }}
-        size={30}
+    <div className="w-full h-full">
+      <User
+        id={users.length > 1 ? conversation.id : users[0].id}
+        name={name}
+        status={`${isOwn ? "sent" : "recieve"}:${lastMessage.body}`}
+        image={image}
+        icon={<HiChatAlt2 />}
+        NameClick={() => NameClick()}
+        IconClick={() => IconClick()}
       />
     </div>
   );

@@ -7,8 +7,9 @@ import { HiChatBubbleBottomCenter, HiPhone } from "react-icons/hi2";
 
 import { LogOut } from ".";
 import { Chats, Stories, Calls, AddFriends, AllFriends } from "../users";
-import { state } from "../../context/store";
+import { modal, state } from "../../context/store";
 const SideBar = ({ selectedTab, setSelectedTab }) => {
+  const { setUserSetting } = modal();
   const { isOpen, setIsOpen, Friends, addFriends } = state();
 
   if (isOpen) {
@@ -75,13 +76,14 @@ const SideBar = ({ selectedTab, setSelectedTab }) => {
             </div>
           </div>
           <div className="relative">
-            <div className="bg-green-400 border border-white absolute top-0.5 right-0.5 w-5 h-5 rounded-full" />
+            <div className="bg-green-300 border border-white absolute top-0.5 right-0.5 w-5 h-5 rounded-full" />
             <Image
-              width={7000}
-              height={7000}
+              width="60"
+              height="60"
               alt="Default"
               className="rounded-full h-[60px] w-[60px] m-1 hidden sm:block"
               src="/DefaultUser.jpg"
+              onClick={() => setUserSetting(true)}
             />
           </div>
         </div>

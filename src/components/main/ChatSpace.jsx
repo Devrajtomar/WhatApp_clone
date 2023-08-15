@@ -2,19 +2,21 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import Image from "next/image";
 import { format, formatDistanceToNow, subDays } from "date-fns";
-import { state } from "../../context/store";
-
+import { modal, state } from "../../context/store";
+import { BsThreeDotsVertical } from "react-icons/bs";
 import { Recieve, Send } from "../../containers";
 import { HiArrowLeft, HiHand, HiMicrophone } from "react-icons/hi";
-import { HiDocument } from "react-icons/hi2";
+import { HiChevronLeft, HiDocument } from "react-icons/hi2";
 import { PusherCl } from "@/lib/pusher";
 const ChatSpace = () => {
-  const { user, currentChatUser, setIsOpen } = state();
+  const { user, currentChatUser, isOpen, setIsOpen } = state();
   const [message, setMessage] = useState("");
   const [conversation, setConversation] = useState([]);
   const [conversationId, setConversationId] = useState("");
   const [isSending, setIsSending] = useState(false);
   const [isSent, setIsSent] = useState(false);
+
+  const { setChatSetting, setAccount } = modal();
   const getConversation = async () => {
     if (currentChatUser.id) {
       const anotherUser = currentChatUser.id;
@@ -78,29 +80,41 @@ const ChatSpace = () => {
 
   return (
     <div className="page flex flex-col py-3 md:pb-5">
-      <div className="bg-gradient w-full text-white z-20 p-2 flex justify-start items-center gap-2 ">
-        <HiArrowLeft
-          size={40}
-          className="cursor-pointer hover:scale-105 md:hidden"
-          onClick={() => setIsOpen(true)}
-        />
-        <Image
-          width={500}
-          height={500}
-          alt="Default"
-          className="rounded-full h-[60px] w-[60px]"
-          src={
-            currentChatUser.image === null
-              ? "/DefaultUser.jpg"
-              : currentChatUser.image
-          }
-        />
-        <div className="flex justify-center items-start gap-1 flex-col ">
-          <div className="text-xl uppercase font-bold text-white">
-            {currentChatUser.Name}
+      <div className="bg-gradient w-full text-white z-20 p-2 flex justify-between items-center gap-2 ">
+        <div className="flex justify-start items-center gap-2 ">
+          <HiChevronLeft
+            size={40}
+            className={`cursor-pointer hover:scale-105 ${
+              isOpen ? "hidden" : ""
+            }`}
+            onClick={() => setIsOpen(true)}
+          />
+          <Image
+            width="60"
+            height="60"
+            alt="Default"
+            className="rounded-full h-[60px] w-[60px]"
+            src={
+              currentChatUser.image === null
+                ? "/DefaultUser.jpg"
+                : currentChatUser.image
+            }
+          />
+          <div
+            className="flex justify-center items-start gap-1 flex-col "
+            onClick={() => setAccount(true)}
+          >
+            <div className="text-xl uppercase font-bold text-white">
+              {currentChatUser.Name}
+            </div>
+            <div className="text-base text-zinc-200">{lastSeen}</div>
           </div>
-          <div className="text-base text-zinc-200">{lastSeen}</div>
         </div>
+        <BsThreeDotsVertical
+          size={37}
+          onClick={() => setChatSetting(true)}
+          className="hover:bg-gray-100 hover:text-black rounded-full cursor-pointer p-1"
+        />
       </div>
       {conversation.length === 0 ? (
         <div className="w-full h-full FlexCenter text-xl font-serif font-bold">

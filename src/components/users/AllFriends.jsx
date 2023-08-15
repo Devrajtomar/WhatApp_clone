@@ -1,8 +1,6 @@
-import { state } from "@/context/store";
 import React, { useState } from "react";
-import AddFriends from "./AddFriends";
+import { state } from "@/context/store";
 import { HiUserAdd } from "react-icons/hi";
-import { HiArrowLeft } from "react-icons/hi2";
 
 const AllFriends = () => {
   const [allFriends, setAllFriends] = useState([]);

@@ -6,7 +6,7 @@ import { useEffect, useState } from "react";
 import { toast } from "react-hot-toast";
 
 import { SideBar } from "../components/navigation";
-import { ChatSpace, CallsSpace, Stories } from "../components/main";
+import { ChatSpace, CallsSpace, Stories, Modal } from "../components/main";
 import { Loading } from "../containers";
 import { state } from "@/context/store";
 
@@ -56,6 +56,7 @@ const Page = () => {
       {selectedTab === "Chat" && <ChatSpace User={{ chats: [] }} />}
       {selectedTab === "Stories" && <Stories User={{}} />}
       {selectedTab === "Calls" && <CallsSpace User={{}} />}
+      <Modal />
     </div>
   );
 };

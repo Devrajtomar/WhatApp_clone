@@ -120,7 +120,7 @@ label {
   @apply w-10 h-10 md:w-14 md:h-14 rounded-full bg-black;
 }
 .SideBar {
-  @apply h-full fixed md:relative top-0 left-0 flex gap-0.5 justify-start items-start  bg-zinc-400 w-full sm:min-w-[350px] lg:w-2/3 overflow-y-scroll z-[10000000];
+  @apply h-full fixed md:relative top-0 left-0 flex gap-0.5 justify-start items-start  bg-zinc-400 w-full sm:min-w-[350px] lg:w-2/3 overflow-y-scroll z-[999];
 }
 .sidebar_icons {
   @apply md:w-fit w-full bg-white h-fit md:min-h-screen fixed top-0 left-0 flex items-center md:pb-4 justify-evenly md:justify-between md:flex-col text-lg font-semibold;
@@ -145,7 +145,10 @@ label {
   @apply flex flex-col gap-3 items-end sm:items-start justify-start pt-2 p-1 sm:px-2 w-full min-w-[350px];
 }
 .user {
-  @apply p-2 bg-gray-100  rounded-full w-[95%] sm:w-full hover:bg-zinc-300 cursor-pointer flex items-center justify-between gap-2;
+  @apply p-2 bg-gray-100  rounded-full w-full hover:bg-zinc-300 cursor-pointer flex items-center justify-center gap-2;
+}
+.user .icon {
+  @apply rounded-lg text-3xl mx-2 bg-gray-300 hover:bg-white;
 }
 .recieve {
   @apply w-[98%] flex gap-2 items-center justify-start;
@@ -158,4 +161,7 @@ label {
 }
 .time {
   @apply font-mono uppercase text-zinc-700 scale-y-95;
+}
+.modal {
+  @apply fixed top-0 right-0 inset-0 bg-black bg-opacity-20 flex items-center justify-center z-[9999];
 }
