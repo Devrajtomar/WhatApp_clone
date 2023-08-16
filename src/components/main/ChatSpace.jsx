@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import axios from "axios";
 import Image from "next/image";
 import { format, formatDistanceToNow, subDays } from "date-fns";
@@ -9,6 +9,8 @@ import { HiArrowLeft, HiHand, HiMicrophone } from "react-icons/hi";
 import { HiChevronLeft, HiDocument } from "react-icons/hi2";
 import { PusherCl } from "@/lib/pusher";
 const ChatSpace = () => {
+  // constant states
+
   const { user, currentChatUser, isOpen, setIsOpen } = state();
   const [message, setMessage] = useState("");
   const [conversation, setConversation] = useState([]);
@@ -16,7 +18,22 @@ const ChatSpace = () => {
   const [isSending, setIsSending] = useState(false);
   const [isSent, setIsSent] = useState(false);
 
+  const lastSeen =
+    currentChatUser !== "" &&
+    formatDistanceToNow(
+      subDays(new Date(currentChatUser.updatedAt), 0),
+      new Date(),
+      { addSuffix: true },
+    );
+
+  // constant states
+
+  //hooks
   const { setChatSetting, setAccount } = modal();
+  const chatContainerRef = useRef(null);
+  //hooks
+
+  //updatings states
   const getConversation = async () => {
     if (currentChatUser.id) {
       const anotherUser = currentChatUser.id;
@@ -37,34 +54,12 @@ const ChatSpace = () => {
     setConversation((current) => [...current, message]);
     getConversation();
   };
-
-  useEffect(() => {
-    getConversation();
-  }, [currentChatUser]);
-  useEffect(() => {
-    PusherCl.subscribe(conversationId);
-    PusherCl.bind("message:new", hendleNewMessage);
-
-    return () => {
-      PusherCl.unbind("message:new", hendleNewMessage);
-      PusherCl.unsubscribe(conversationId);
-    };
-  }, [currentChatUser, conversationId]);
-  if (currentChatUser === "") {
-    return (
-      <div className="page">
-        <div className="text-2xl font-semibold font-serif h-full w-full flex justify-center items-center  text-center">
-          SELECT A CHAT OR START NEW CONVERSATION
-        </div>
-      </div>
-    );
-  }
-
-  const lastSeen = formatDistanceToNow(
-    subDays(new Date(currentChatUser.updatedAt), 0),
-    new Date(),
-    { addSuffix: true },
-  );
+  const scrollToBottom = () => {
+    if (chatContainerRef.current) {
+      chatContainerRef.current.scrollTop =
+        chatContainerRef.current.scrollHeight;
+    }
+  };
   const SendMessage = async (e) => {
     e.preventDefault();
     setIsSending(true);
@@ -80,11 +75,35 @@ const ChatSpace = () => {
         return setTimeout(() => {
           setIsSending(false);
           setIsSent(false);
-        }, 2000);
+        }, 1500);
       }
     }
   };
+  //updatings states
 
+  //useEffects
+  useEffect(() => {
+    getConversation();
+  }, [currentChatUser]);
+  useEffect(() => {
+    const pusher = PusherCl.subscribe(conversationId);
+    pusher.bind("message:new", hendleNewMessage);
+  }, [currentChatUser, conversationId]);
+  useEffect(() => {
+    scrollToBottom();
+  }, [conversation]);
+  //useEffects
+
+  //conversations
+  if (currentChatUser === "") {
+    return (
+      <div className="page">
+        <div className="text-2xl font-semibold font-serif h-full w-full flex justify-center items-center  text-center">
+          SELECT A CHAT OR START NEW CONVERSATION
+        </div>
+      </div>
+    );
+  }
   return (
     <div className="page flex flex-col py-3 md:pb-5">
       <div className="bg-gradient w-full text-white z-20 p-2 flex justify-between items-center gap-2 ">
@@ -128,7 +147,10 @@ const ChatSpace = () => {
           Say Hello <HiHand />
         </div>
       ) : (
-        <div className="flex-grow w-full overflow-y-scroll  overflow-x-hidden relative">
+        <div
+          className="flex-grow w-full overflow-y-scroll  overflow-x-hidden relative"
+          ref={chatContainerRef}
+        >
           {conversation.map((message) => (
             <div
               className="w-full flex justify-center items-center gap-2 my-2 text-black text-lg relative"

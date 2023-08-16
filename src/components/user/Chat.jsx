@@ -13,12 +13,8 @@ const Chat = ({ conversation }) => {
   const name = users.length >= 2 ? conversation.name : users[0].Name;
   const image = users.length > 1 ? conversation.image : users[0].image;
   useEffect(() => {
-    PusherCl.subscribe(conversation.id);
-    PusherCl.bind("message:new", (message) => setLastMessage(message));
-    return () => {
-      PusherCl.unsubscribe(conversation.id);
-      PusherCl.unbind("message:new", (message) => setLastMessage(message));
-    };
+    const pusher = PusherCl.subscribe(conversation.id);
+    pusher.bind("message:new", (message) => setLastMessage(message));
   }, [lastMessage]);
   const NameClick = () => {
     setIsOpen(window.innerWidth <= 800 ? false : true);

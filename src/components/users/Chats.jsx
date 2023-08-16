@@ -16,16 +16,13 @@ const Chats = () => {
           id: id,
         });
 
-        if (
-          res.status === 200 &&
-          res.data.conversation.messages.length !== 0 &&
-          conversations.includes(res.data.conversation)
-        ) {
-          console.log(conversations.includes(res.data.conversation));
-          return setConversations((current) => [
-            ...current,
-            res.data.conversation,
-          ]);
+        if (res.status === 200 && res.data.conversation.messages.length !== 0) {
+          const isNewConversation = conversations.every(
+            (conv) => conv.id !== res.data.conversation.id,
+          );
+          if (isNewConversation) {
+            setConversations((curr) => [...curr, res.data.conversation]);
+          }
         }
       });
     }
@@ -44,7 +41,7 @@ const Chats = () => {
           onClick={() => setNewGroup(true)}
         />
       </div>
-      {conversations.length !== 0 && (
+      {conversations.length > 0 && (
         <div className="users">
           {conversations.map((chat) => (
             <Chat key={chat.id} conversation={chat} />

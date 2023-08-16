@@ -31,7 +31,7 @@ const handler = async (req, res) => {
           sender: true,
         },
       });
-      const updatedConversations = await prisma.conversation.update({
+      await prisma.conversation.update({
         where: {
           id: conversationId,
         },
