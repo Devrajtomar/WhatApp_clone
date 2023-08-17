@@ -1,7 +1,16 @@
-import React from "react";
+import JitsiContainer from "@/utils/Calls";
+import Jitsi from "../../styles/Jitsi";
+import React, { useState } from "react";
 
 const CallsSpace = () => {
-  return <div className="page">CallsSpace</div>;
+  Jitsi();
+
+  return (
+    <div className="page">
+      <JitsiContainer />
+      <div id="CallContainer"></div>
+    </div>
+  );
 };
 
 export default CallsSpace;

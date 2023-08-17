@@ -9,6 +9,7 @@ import { SideBar } from "../components/navigation";
 import { ChatSpace, CallsSpace, Stories, Modal } from "../components/main";
 import { Loading } from "../containers";
 import { state } from "@/context/store";
+import "../styles/jitsi.css";
 
 const Page = () => {
   const { setUser } = state();
@@ -33,7 +34,7 @@ const Page = () => {
           setData(data);
           setUser(data);
         } catch (error) {
-          console.error("Error fetching data:", error);
+          //console.error("Error fetching data:", error);
           router.push("/login");
           toast.error(
             <h1 className="errBold text-rose-500">
