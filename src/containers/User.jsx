@@ -18,7 +18,7 @@ const User = ({ id, name, image, status, icon, NameClick, IconClick }) => {
         alt={name}
         height="60"
         width="60"
-        className="rounded-full object-cover"
+        className="rounded-full object-cover h-[60px] w-[60px]"
         onClick={() => setImage(true)}
       />
       <div className="w-full" onClick={NameClick}>

@@ -10,5 +10,5 @@
   @apply w-0;
 }
 #CallContainer {
-  @apply w-full h-full rounded-md bg-black;
+  @apply w-full h-full rounded-md bg-rose-100;
 }

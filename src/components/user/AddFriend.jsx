@@ -30,11 +30,12 @@ const AddFriend = ({ userData }) => {
     setChatUser(userData);
     createConversation(userData.id);
   };
-  const IconClick = () => {
-    console.log({
-      sender: user.id,
-      reciever: userData.id,
+  const IconClick = async () => {
+    const res = await axios.post("/api/friends/request", {
+      senderId: user.id,
+      recieverId: userData.id,
     });
+    console.log(res.data);
   };
 
   return (

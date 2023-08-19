@@ -13,6 +13,11 @@ export const state = create((set) => ({
     set(() => ({
       Friends: value,
     })),
+  Requests: false,
+  setRequests: (value) =>
+    set(() => ({
+      Requests: value,
+    })),
   addFriends: false,
   setAddFriends: (value) =>
     set(() => ({

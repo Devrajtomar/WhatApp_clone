@@ -37,8 +37,8 @@ const AddFriends = () => {
           </div>
         </div>
 
-        {users.map((user) => (
-          <AddFriend key={user.id} userData={user} />
+        {users.map((friend) => (
+          <AddFriend key={friend.id} userData={friend} />
         ))}
       </div>
     );

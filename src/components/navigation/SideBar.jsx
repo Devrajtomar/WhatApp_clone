@@ -6,11 +6,18 @@ import Image from "next/image";
 import { HiChatBubbleBottomCenter, HiPhone } from "react-icons/hi2";
 
 import { LogOut } from ".";
-import { Chats, Stories, Calls, AddFriends, AllFriends } from "../users";
+import {
+  Chats,
+  Stories,
+  Calls,
+  AddFriends,
+  AllFriends,
+  AllRequests,
+} from "../users";
 import { modal, state } from "../../context/store";
 const SideBar = ({ selectedTab, setSelectedTab }) => {
   const { setUserSetting } = modal();
-  const { isOpen, setIsOpen, Friends, addFriends } = state();
+  const { isOpen, setIsOpen, Friends, addFriends, Requests } = state();
 
   if (isOpen) {
     return (
@@ -93,7 +100,8 @@ const SideBar = ({ selectedTab, setSelectedTab }) => {
             <div className="w-full h-full">
               {addFriends && <AddFriends />}
               {Friends && <AllFriends />}
-              {!addFriends && !Friends && <Chats />}
+              {Requests && <AllRequests />}
+              {!addFriends && !Friends && !Requests && <Chats />}
             </div>
           )}
           {selectedTab === "Stories" && <Stories />}
