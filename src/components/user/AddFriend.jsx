@@ -35,7 +35,6 @@ const AddFriend = ({ userData }) => {
       senderId: user.id,
       recieverId: userData.id,
     });
-    console.log(res.data);
   };
 
   return (

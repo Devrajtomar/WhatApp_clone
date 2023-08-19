@@ -24,7 +24,6 @@ const AllRequests = () => {
       senderId,
       status,
     });
-    console.log(res.data);
     fetchRequests();
   };
 

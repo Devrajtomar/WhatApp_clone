@@ -34,7 +34,6 @@ const ChatSpace = () => {
   const { setChatSetting, setAccount } = modal();
   const chatContainerRef = useRef(null);
   //hooks
-  console.log(conversationId);
   //updatings states
   const getConversation = async () => {
     if (currentChatUser.id) {

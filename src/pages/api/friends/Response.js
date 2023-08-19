@@ -9,7 +9,6 @@ const handler = async (req, res) => {
       const recieverId = req.body.recieverId;
       const senderId = req.body.senderId;
       const status = req.body.status;
-      console.log([recieverId, senderId]);
       const requests = await prisma.request.findMany({
         where: {
           AND: {
@@ -18,7 +17,6 @@ const handler = async (req, res) => {
           },
         },
       });
-      console.log(requests);
       const response = await prisma.request.update({
         where: {
           id: requests[0].id,
@@ -28,7 +26,6 @@ const handler = async (req, res) => {
           IsBlocked: status === "block" ? true : false,
         },
       });
-      console.log(response);
       res.send(`request has been ${status + "ed"}`);
     });
   }

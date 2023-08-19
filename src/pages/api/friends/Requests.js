@@ -7,7 +7,6 @@ const handler = async (req, res) => {
   if (req.method === "POST") {
     jsonParser(req, res, async () => {
       const Id = req.body.Id;
-      console.log(Id);
       const requests = await prisma.request.findMany({
         where: {
           AND: {
@@ -27,7 +26,6 @@ const handler = async (req, res) => {
           },
         },
       });
-      console.log(requests);
       res.send(requests);
     });
   }

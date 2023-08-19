@@ -8,7 +8,6 @@ const handler = async (req, res) => {
     jsonParser(req, res, async () => {
       const recieverId = req.body.recieverId;
       const senderId = req.body.senderId;
-      console.log([recieverId, senderId]);
       const requests = await prisma.request.findMany({
         where: {
           AND: {
@@ -53,7 +52,6 @@ const handler = async (req, res) => {
             },
           });
         } catch (err) {
-          console.log(err);
           res.send(err);
         }
       } else {
