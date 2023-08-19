@@ -57,7 +57,9 @@ const Page = () => {
       <SideBar setSelectedTab={setSelectedTab} selectedTab={selectedTab} />
       {selectedTab === "Chat" && <ChatSpace User={{ chats: [] }} />}
       {selectedTab === "Stories" && <Stories User={{}} />}
-      {selectedTab === "Calls" && <CallsSpace User={{}} />}
+      {
+        selectedTab === "Calls" && "calls" //<CallsSpace User={{}}/>
+      }
       <Modal />
     </div>
   );
