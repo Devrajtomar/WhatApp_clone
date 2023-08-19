@@ -55,11 +55,9 @@ const Page = () => {
   return (
     <div className="home">
       <SideBar setSelectedTab={setSelectedTab} selectedTab={selectedTab} />
-      {selectedTab === "Chat" && <ChatSpace User={{ chats: [] }} />}
-      {selectedTab === "Stories" && <Stories User={{}} />}
-      {
-        selectedTab === "Calls" && "calls" //<CallsSpace User={{}}/>
-      }
+      {selectedTab === "Chat" && <ChatSpace />}
+      {selectedTab === "Stories" && <Stories />}
+      {selectedTab === "Calls" && <CallsSpace />}
       <Modal />
     </div>
   );

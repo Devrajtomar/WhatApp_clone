@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import { state } from "@/context/store";
 import { HiChatAlt2, HiUserAdd } from "react-icons/hi";
 import axios from "axios";
-import Chat from "../user/Chat";
 import { User } from "@/containers";
 
 const AllFriends = () => {
@@ -56,6 +55,7 @@ const AllFriends = () => {
           {allFriends.map((friend) => (
             <div className="w-full h-full">
               <User
+                key={friend.id + "freind"}
                 id={friend.sender.id}
                 name={friend.sender.Name}
                 status={

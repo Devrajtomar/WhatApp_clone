@@ -50,6 +50,7 @@ const AllRequests = () => {
         <div className="users">
           {allRequests?.map((request) => (
             <User
+              key={request.id + "reequest"}
               name={request.sender.Name}
               image={request.sender.image}
               status={
