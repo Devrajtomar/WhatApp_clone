@@ -8,8 +8,6 @@ import { Recieve, Send } from "../../containers";
 import { HiHand, HiMicrophone } from "react-icons/hi";
 import { HiChevronLeft, HiDocument } from "react-icons/hi2";
 import { PusherCl } from "@/lib/pusher";
-
-import Jitsi from "../../utils/Calls";
 const ChatSpace = () => {
   // constant states
 
