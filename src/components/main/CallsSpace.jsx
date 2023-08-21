@@ -1,5 +1,3 @@
-import JitsiContainer from "@/utils/Calls";
-
 const CallsSpace = () => {
   const frame = document.querySelector("body>iframe#jitsiConferenceFrame0");
   const container = document.querySelector(".page > #CallContainer");
