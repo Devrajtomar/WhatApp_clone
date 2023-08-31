@@ -50,8 +50,7 @@ const Chats = () => {
       )}
       <HiChatBubbleLeft
         size={50}
-        className="absolute bottom-2 right-2 bg-gray-100 hover:bg-gray-200 
-        text-zinc-600 hover:text-zinc-700 p-2 rounded-full cursor-pointer"
+        className="IconBottom"
         onClick={() => setFriends(true)}
       />
       {conversations.length === 0 && (

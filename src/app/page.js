@@ -10,12 +10,14 @@ import { ChatSpace, CallsSpace, Stories, Modal } from "../components/main";
 import { Loading } from "../containers";
 import { state } from "@/context/store";
 import "../styles/jitsi.css";
+import Scripts from "../scripts";
 
 const Page = () => {
   const { setUser } = state();
   const [selectedTab, setSelectedTab] = useState("Chat");
   const router = useRouter();
   const [data, setData] = useState(null);
+  Scripts();
 
   let token = "";
   if (typeof window !== "undefined") {

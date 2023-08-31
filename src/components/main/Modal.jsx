@@ -7,9 +7,18 @@ import {
   UserSettingsModal,
   NewGroupModal,
 } from "../models";
+import NewStoryModal from "../models/NewStoryModal";
 const Modal = () => {
-  const { image, Account, ChatSetting, userSettings, NewGroup } = modal();
-  if (!image && !Account && !ChatSetting && !userSettings && !NewGroup) {
+  const { image, Account, ChatSetting, userSettings, NewGroup, NewStory } =
+    modal();
+  if (
+    !image &&
+    !Account &&
+    !ChatSetting &&
+    !userSettings &&
+    !NewGroup &&
+    !NewStory
+  ) {
     return null;
   }
   return (
@@ -19,6 +28,7 @@ const Modal = () => {
       {ChatSetting && <ChatSettingModal data={""} />}
       {userSettings && <UserSettingsModal data={""} />}
       {NewGroup && <NewGroupModal data={""} />}
+      {NewStory && <NewStoryModal data={""} />}
     </div>
   );
 };

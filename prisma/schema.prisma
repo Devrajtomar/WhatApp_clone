@@ -27,12 +27,40 @@ model User {
   
   seenMessageIds String[] @db.ObjectId
   seenMessages Message[] @relation("Seen", fields: [seenMessageIds], references: [id])
+  seenStoriesIds String[] @db.ObjectId
+  seenStories Story[] @relation("Seen",fields: [seenStoriesIds], references: [id])
 
   FriendRequests Request[]
   accounts Account[]
   messages Message[]
+  stories Stories[]
 }
 
+model Stories{
+    id              String @id @default(auto()) @map("_id") @db.ObjectId
+
+    userId String @db.ObjectId
+    user User @relation(fields: [userId], references: [id])
+    
+    StoriesIds String[] @db.ObjectId
+    Stories Story[] 
+  
+}
+model Story {
+  id        String         @id @default(auto()) @map("_id") @db.ObjectId
+  StoriesId String @db.ObjectId
+  BelongsTo Stories @relation(fields: [StoriesId],references: [id])
+  isDeleted Boolean @default(false)
+  type String
+  DataUrl String
+  description String?
+  createdAt DateTime @default(now())
+
+  SeenUsersIds String[] @db.ObjectId
+  SeenUsers User[] @relation("Seen",fields: [SeenUsersIds],references: [id])
+
+
+}
 
 model Conversation {
   id String @id @default(auto()) @map("_id") @db.ObjectId

@@ -8,7 +8,10 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body>
+      <head>
+        <script src="https://meet.jit.si/external_api.js"></script>
+      </head>
+      <body id="body">
         <ErrorContext />
         {children}
       </body>

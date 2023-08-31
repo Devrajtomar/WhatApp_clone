@@ -38,4 +38,6 @@ export const modal = create((set) => ({
   setUserSetting: (value) => set({ userSettings: value }),
   NewGroup: false,
   setNewGroup: (value) => set({ NewGroup: value }),
+  NewStory: false,
+  setNewStory: (value) => set({ NewStory: value }),
 }));

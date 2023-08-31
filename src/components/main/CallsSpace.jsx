@@ -13,6 +13,7 @@ const CallsSpace = () => {
 
   return (
     <div className="page">
+      <div id="CallScript"></div>
       <div id="CallContainer"></div>
     </div>
   );
