@@ -26,10 +26,10 @@ const AuthForm = ({ varient, setVarient }) => {
             })
             .then((res) => {
               if (res.data.Found) {
+                router.push("/");
                 setIsLoading(false);
 
                 window.localStorage.setItem("token", res.data.token);
-                router.push("/");
 
                 toast.success(<h1 className="message">{res.data.message}</h1>);
               } else {
@@ -70,10 +70,10 @@ const AuthForm = ({ varient, setVarient }) => {
             );
           }
           if (res.data.success) {
+            router.push("/");
             setIsLoading(false);
             toast.success(<div className="message">New Account Created</div>);
             window.localStorage.setItem("token", res.data.token);
-            router.push("/");
           }
         } catch (err) {
           setIsLoading(false);
@@ -136,7 +136,7 @@ const AuthForm = ({ varient, setVarient }) => {
             placeholder="Enter your Password"
           />
         </div>
-        <button className="btn w-full mt-4" type="submit">
+        <button className="btn w-full mt-4">
           {varient === "Sign In" ? "Sign In" : "Create New Account"}
         </button>
       </form>

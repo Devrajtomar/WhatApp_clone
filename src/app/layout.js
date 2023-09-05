@@ -4,7 +4,6 @@ export const metadata = {
   title: "Messanger",
   description: "A Full Stack messanging App",
 };
-
 export default function RootLayout({ children }) {
   return (
     <html lang="en">

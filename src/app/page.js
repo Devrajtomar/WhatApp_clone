@@ -35,8 +35,11 @@ const Page = () => {
 
           setData(data);
           setUser(data);
+          if (!data.id) {
+            router.push("/login");
+          }
         } catch (error) {
-          //console.error("Error fetching data:", error);
+          console.error("Error fetching data:", error);
           router.push("/login");
           toast.error(
             <h1 className="errBold text-rose-500">

@@ -29,7 +29,7 @@ const Chat = ({ conversation }) => {
       <User
         id={users.length > 1 ? conversation.id : users[0].id}
         name={name}
-        status={`${isOwn ? "sent" : "recieve"}:${lastMessage.body}`}
+        status={`${isOwn ? "sent" : "recieved"}:${lastMessage.body}`}
         image={image}
         icon={<HiChatAlt2 />}
         NameClick={() => NameClick()}

@@ -23,88 +23,76 @@ model User {
   updatedAt       DateTime @updatedAt
 
   conversationIds String[] @db.ObjectId
-  conversations Conversation[] @relation(fields: [conversationIds], references: [id])
+  conversations   Conversation[] @relation(fields: [conversationIds], references: [id])
   
   seenMessageIds String[] @db.ObjectId
-  seenMessages Message[] @relation("Seen", fields: [seenMessageIds], references: [id])
+  seenMessages   Message[] @relation("Seen", fields: [seenMessageIds], references: [id])
   seenStoriesIds String[] @db.ObjectId
-  seenStories Story[] @relation("Seen",fields: [seenStoriesIds], references: [id])
-
-  FriendRequests Request[]
-  accounts Account[]
-  messages Message[]
-  stories Stories[]
-}
-
-model Stories{
-    id              String @id @default(auto()) @map("_id") @db.ObjectId
-
-    userId String @db.ObjectId
-    user User @relation(fields: [userId], references: [id])
-    
-    StoriesIds String[] @db.ObjectId
-    Stories Story[] 
+  seenStories    Story[] @relation("Seen",fields: [seenStoriesIds], references: [id])
   
+  Stories Story[]
+  FriendRequests Request[]
+  accounts       Account[]
+  messages       Message[]
 }
+
 model Story {
-  id        String         @id @default(auto()) @map("_id") @db.ObjectId
-  StoriesId String @db.ObjectId
-  BelongsTo Stories @relation(fields: [StoriesId],references: [id])
-  isDeleted Boolean @default(false)
-  type String
-  DataUrl String
-  description String?
-  createdAt DateTime @default(now())
+  id           String @id @default(auto()) @map("_id") @db.ObjectId
+  isDeleted    Boolean @default(false)
+  type         String
+  DataUrl      String
+  description  String?
+  createdAt    DateTime @default(now())
 
+  userId       String @db.ObjectId
+  user         User @relation(fields: [userId], references: [id])
   SeenUsersIds String[] @db.ObjectId
-  SeenUsers User[] @relation("Seen",fields: [SeenUsersIds],references: [id])
-
-
+  SeenUsers    User[] @relation("Seen",fields: [SeenUsersIds],references: [id])
 }
 
 model Conversation {
   id String @id @default(auto()) @map("_id") @db.ObjectId
   createdAt       DateTime @default(now())
   lastMessageAt DateTime @default(now())
-  name String?
-  isGroup Boolean?
+  name          String?
+  isGroup       Boolean?
   
-  messagesIds String[] @db.ObjectId
-  messages Message[]
+  messagesIds   String[] @db.ObjectId
+  messages      Message[]
 
   userIds String[] @db.ObjectId
   users User[] @relation(fields: [userIds], references: [id])
 }
 
 model Request {
-  id String @id @default(auto()) @map("_id") @db.ObjectId
-  sender User @relation(fields: [senderId], references: [id])
-  senderId String @db.ObjectId
-  recieverId String @db.ObjectId
-  IsBlocked Boolean @default(false)
+  id         String @id @default(auto()) @map("_id") @db.ObjectId
+  SenderIds  String[] @db.ObjectId
+  Users      User @relation(fields: [SenderIds], references: [id])
+  RecieverId String @db.ObjectId
+  IsBlocked  Boolean @default(false)
   IsAccepted Boolean @default(false)
-  createdAt DateTime @default(now())
+  createdAt  DateTime @default(now())
 }
 
 
 model Message {
-  id String @id @default(auto()) @map("_id") @db.ObjectId
-  body String?
-  image String?
-  createdAt DateTime @default(now())
+  id             String @id @default(auto()) @map("_id") @db.ObjectId
+  body           String?
+  image          String?
+  createdAt      DateTime @default(now())
 
-  seenIds String[] @db.ObjectId
-  seen User[] @relation("Seen", fields: [seenIds], references: [id])
+  seenIds        String[] @db.ObjectId
+  seen           User[] @relation("Seen", fields: [seenIds], references: [id])
 
   conversationId String @db.ObjectId
-  conversation Conversation @relation(fields: [conversationId], references: [id], onDelete: Cascade)
+  conversation   Conversation @relation(fields: [conversationId], references: [id], onDelete: Cascade)
   
-  senderId String @db.ObjectId
-  sender User @relation(fields: [senderId], references: [id], onDelete: Cascade)
+  senderId       String @db.ObjectId
+  sender         User @relation(fields: [senderId], references: [id], onDelete: Cascade)
 }
 
 model Account {
-  id String @id @default(auto()) @map("_id") @db.ObjectId
+  id                 String @id @default(auto()) @map("_id") @db.ObjectId
   userId             String   @db.ObjectId
   type               String
   provider           String
@@ -117,7 +105,7 @@ model Account {
   id_token           String?  @db.String
   session_state      String?
 
-  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  user               User @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@unique([provider, providerAccountId])
 }

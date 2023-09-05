@@ -64,6 +64,7 @@ const ChatSpace = () => {
     setIsSending(true);
     setMessage("");
     if (conversationId !== "") {
+      console.log(conversationId);
       const res = await axios.post("/api/conversations/messages", {
         message,
         senderId: user.id,
@@ -85,8 +86,10 @@ const ChatSpace = () => {
     getConversation();
   }, [currentChatUser]);
   useEffect(() => {
-    const pusher = PusherCl.subscribe(conversationId);
-    pusher.bind("message:new", hendleNewMessage);
+    if (conversationId) {
+      const pusher = PusherCl.subscribe(conversationId);
+      pusher.bind("message:new", hendleNewMessage);
+    }
   }, [currentChatUser, conversationId]);
   useEffect(() => {
     scrollToBottom();

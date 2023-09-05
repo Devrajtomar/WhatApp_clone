@@ -15,6 +15,7 @@ import {
   AllRequests,
 } from "../users";
 import { modal, state } from "../../context/store";
+import axios from "axios";
 const SideBar = ({ selectedTab, setSelectedTab }) => {
   const { setUserSetting } = modal();
   const { isOpen, setIsOpen, Friends, addFriends, Requests } = state();
@@ -51,9 +52,7 @@ const SideBar = ({ selectedTab, setSelectedTab }) => {
                 className={`${
                   selectedTab === "Stories" ? "selected_Icon" : "page_icons"
                 }`}
-                onClick={() => {
-                  setSelectedTab("Stories");
-                }}
+                onClick={() => setSelectedTab("Stories")}
               >
                 <AiFillPlaySquare className="text-2xl xl:text-3xl" />
                 <div>Stories</div>

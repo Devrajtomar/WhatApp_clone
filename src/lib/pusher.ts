@@ -1,6 +1,6 @@
-import Pusher from "pusher";
+import PusherServer from "pusher";
 import PusherClient from "pusher-js";
-export const PusherSr = new Pusher({
+export const PusherSr = new PusherServer({
   appId: "1650972",
   key: "20ddf1bf3b962b594c58",
   secret: "dffeee08e7f8afc62866",
