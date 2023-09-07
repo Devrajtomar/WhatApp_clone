@@ -1,3 +1,4 @@
+import { data } from "autoprefixer";
 import prisma from "../../../lib/prismaDB";
 import bodyParser from "body-parser";
 
@@ -12,12 +13,12 @@ const handler = async (req, res) => {
       const requests = await prisma.request.findMany({
         where: {
           AND: {
-            senderId,
-            recieverId,
+            SenderId: senderId,
+            RecieverId: recieverId,
           },
         },
       });
-      const response = await prisma.request.update({
+      await prisma.request.update({
         where: {
           id: requests[0].id,
         },
@@ -26,6 +27,32 @@ const handler = async (req, res) => {
           IsBlocked: status === "block" ? true : false,
         },
       });
+      if (status === "accept") {
+        await prisma.user.update({
+          where: {
+            id: senderId,
+          },
+          data: {
+            friends: {
+              connect: {
+                id: recieverId,
+              },
+            },
+          },
+        });
+        await prisma.user.update({
+          where: {
+            id: recieverId,
+          },
+          data: {
+            friends: {
+              connect: {
+                id: senderId,
+              },
+            },
+          },
+        });
+      }
       res.send(`request has been ${status + "ed"}`);
     });
   }

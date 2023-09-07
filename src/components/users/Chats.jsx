@@ -10,10 +10,10 @@ const Chats = () => {
   const { setNewGroup } = modal();
   const { user, setFriends } = state();
   const getChats = async () => {
-    if (user.conversationIds.length !== 0) {
-      user.conversationIds.forEach(async (id) => {
+    if (user.conversations.length !== 0) {
+      user.conversations.forEach(async (conv) => {
         const res = await axios.post("/api/conversations/allChats", {
-          id: id,
+          id: conv.id,
         });
 
         if (res.status === 200 && res.data.conversation.messages.length !== 0) {

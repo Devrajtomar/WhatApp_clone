@@ -10,20 +10,13 @@ const handler = async (req, res) => {
       const requests = await prisma.request.findMany({
         where: {
           AND: {
-            recieverId: Id,
+            RecieverId: Id,
             IsAccepted: false,
             IsBlocked: false,
           },
         },
         include: {
-          sender: {
-            select: {
-              id: true,
-              Name: true,
-              image: true,
-              updatedAt: true,
-            },
-          },
+          Sender: true,
         },
       });
       res.send(requests);

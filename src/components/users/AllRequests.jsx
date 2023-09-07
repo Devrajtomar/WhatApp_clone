@@ -51,10 +51,10 @@ const AllRequests = () => {
           {allRequests?.map((request) => (
             <User
               key={request.id + "reequest"}
-              name={request.sender.Name}
-              image={request.sender.image}
+              name={request.Sender.Name}
+              image={request.Sender.image}
               status={
-                request.sender.about ? request.sender.about : "Hey how are you!"
+                request.Sender.about ? request.Sender.about : "Hey how are you!"
               }
               icon={
                 <div className="flex justify-center items-center gap-2">
@@ -62,17 +62,17 @@ const AllRequests = () => {
                     title="reject"
                     size={30}
                     className="btn p-1"
-                    onClick={() => response(request.senderId, "reject")}
+                    onClick={() => response(request.SenderId, "reject")}
                   />
                   <div
                     className="btn w-fit py-[0.2rem] text-base font-thin"
-                    onClick={() => response(request.senderId, "block")}
+                    onClick={() => response(request.SenderId, "block")}
                   >
                     Block
                   </div>
                   <div
                     className="btn w-fit py-[0.2rem] text-base font-thin"
-                    onClick={() => response(request.sender.id, "accept")}
+                    onClick={() => response(request.Sender.id, "accept")}
                   >
                     Accept
                   </div>

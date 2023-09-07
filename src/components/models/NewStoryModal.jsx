@@ -5,6 +5,7 @@ import { AiOutlineCloseCircle } from "react-icons/ai";
 import axios from "axios";
 import { HiDocumentAdd } from "react-icons/hi";
 import { HiOutlineCamera } from "react-icons/hi2";
+import VideoPlayer from "../../containers/Player";
 
 const NewStoryModal = () => {
   const { user } = state();
@@ -102,14 +103,18 @@ const NewStoryModal = () => {
                   </div>
                   {preview !== null && (
                     <div className=" w-full min-h-[500px] h-full rounded-sm bg-gray-100 flex justify-around items-stretch flex-col gap-1 ">
-                      {selectedFile.type === "video/mp4" && (
-                        <video
+                      {
+                        selectedFile.type === "video/mp4" && (
+                          <VideoPlayer Source={preview} />
+                        )
+                        /* <video
                           src={preview}
                           controls
                           autoPlay
                           className="flex justify-start items-start text-xl flex-col gap-1 w-full bg-zinc-200 min-w-[320px] md:min-h-[400px] min-h-[500px] rounded-sm hover:border-1 border-zinc-300 p-1 max-w-[600px] h-auto object-contain"
-                        />
-                      )}
+                        /> */
+                      }
+
                       {selectedFile.type === "image/jpeg" && (
                         <img
                           src={preview}

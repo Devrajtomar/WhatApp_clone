@@ -5,7 +5,6 @@ import axios from "axios";
 import { User } from "@/containers";
 
 const AllFriends = () => {
-  const [allFriends, setAllFriends] = useState([]);
   const {
     setAddFriends,
     setIsOpen,
@@ -15,14 +14,6 @@ const AllFriends = () => {
     user,
   } = state();
 
-  const fetchFriends = async () => {
-    const res = await axios.post("/api/friends/AllFriends", { Id: user.id });
-    setAllFriends(res.data);
-  };
-
-  useEffect(() => {
-    fetchFriends();
-  }, []);
   const NameClick = (user_) => {
     setIsOpen(window.innerWidth <= 800 ? false : true);
     setChatUser(user_);
@@ -50,29 +41,29 @@ const AllFriends = () => {
           />
         </div>
       </div>
-      {allFriends.length !== 0 && (
+      {user.friends.length !== 0 && (
         <div className="users">
-          {allFriends.map((friend) => (
+          {user.friends.map((friend) => (
             <div className="w-full h-full">
               <User
                 key={friend.id + "freind"}
-                id={friend.sender.id}
-                name={friend.sender.Name}
+                id={friend.id}
+                name={friend.Name}
                 status={
-                  friend.sender.about !== null
-                    ? friend.sender.about
+                  friend.about !== null
+                    ? friend.about
                     : "Hey i'am using messanger!"
                 }
-                image={friend.sender.image}
+                image={friend.image}
                 icon={<HiChatAlt2 />}
-                NameClick={() => NameClick(friend.sender)}
-                IconClick={() => IconClick(friend.sender)}
+                NameClick={() => NameClick(friend)}
+                IconClick={() => IconClick(friend)}
               />
             </div>
           ))}
         </div>
       )}
-      {allFriends.length === 0 && (
+      {user.friends.length === 0 && (
         <div className="w-full h-full flex justify-center flex-col items-center gap-2 overflow-y-scroll">
           <div className="heading_1">You Have No Freinds .</div>
           <div className="w-full flex justify-center items-center gap-3">

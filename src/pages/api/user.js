@@ -23,13 +23,14 @@ const handler = (req, res) => {
               Email: true,
               Name: true,
               image: true,
-              seenMessageIds: true,
               seenMessages: true,
-              conversationIds: true,
               conversations: true,
               messages: true,
               updatedAt: true,
               createdAt: true,
+              friends: true,
+              seenStories: true,
+              Stories: true,
             },
           });
           res.send(data);

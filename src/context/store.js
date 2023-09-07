@@ -25,6 +25,8 @@ export const state = create((set) => ({
     })),
   currentChatUser: "",
   setChatUser: (value) => set(() => ({ currentChatUser: value })),
+  currentStoryUser: "",
+  setStoryUser: (value) => set(() => ({ currentStoryUser: value })),
 }));
 
 export const modal = create((set) => ({
