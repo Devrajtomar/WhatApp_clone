@@ -4,20 +4,21 @@ import { modal, state } from "../../context/store";
 import { User } from "@/containers";
 import { BsThreeDotsVertical } from "react-icons/bs";
 import { MdHistory } from "react-icons/md";
+import { formatDistanceToNow } from "date-fns";
 
 const Story = ({ User }) => {
-  const { user, currentStoryUser, setStoryUser } = state();
+  const { user, setIsOpen, currentStoryUser, setStoryUser } = state();
   const { setNewStory } = modal();
   const Click = (user_) => {
     if (User.id === user.id && User?.Stories?.length === 0) {
       return setNewStory(true);
     }
     if (User.id !== user.id || User?.Stories?.length !== 0) {
+      setIsOpen(window.innerWidth <= 800 ? false : true);
       return setStoryUser(user_);
     }
   };
   const LastStory = User.Stories[User.Stories.length - 1];
-  console.log(LastStory);
   const isSelected = currentStoryUser?.id === User.Id ? true : false;
   return (
     <div
@@ -49,7 +50,11 @@ const Story = ({ User }) => {
       <div className="w-full">
         <div className="text-base md:text-lg heading_2">{User.Name}</div>
         <div className="m-0 flex justify-start items-center gap-1 w-full whitespace-nowrap text-ellipsis overflow-hidden">
-          <pre className="heading_3 text-sm md:text-base">Last Story Time</pre>
+          <pre className="heading_3 text-sm md:text-base">
+            {formatDistanceToNow(new Date(LastStory.createdAt), {
+              addSuffix: true,
+            })}
+          </pre>
         </div>
       </div>
       <BsThreeDotsVertical className="icon" onClick={() => {}} />

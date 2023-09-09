@@ -29,9 +29,13 @@ const Stories = () => {
       <Story User={user} />
       <hr className="h-1 w-full" />
       {AllStories.length !== 0 &&
-        AllStories.map((user_) => (
-          <Story User={user_} key={user_.id + user_.Name + "'s Stories"} />
-        ))}
+        AllStories.map((user_) => {
+          if (user_.Stories.length !== 0) {
+            return (
+              <Story User={user_} key={user_.id + user_.Name + "'s Stories"} />
+            );
+          }
+        })}
     </div>
   );
 };

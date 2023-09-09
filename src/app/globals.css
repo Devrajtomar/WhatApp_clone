@@ -129,7 +129,7 @@ label {
   @apply md:w-fit w-full px-1 bg-white h-fit mt-3 md:mt-0 flex justify-evenly md:justify-start md:flex-col gap-2 font-semibold mb-1;
 }
 .page {
-  @apply fixed md:relative right-0 top-0 w-full h-full z-10 p-2;
+  @apply fixed md:relative right-0 top-0 w-full h-full z-10;
 }
 .page_icons {
   @apply flex justify-center items-center py-1 px-2 md:py-1 md:px-0 gap-1 rounded-md flex-row md:flex-col bg-white text-black hover:bg-black hover:text-white cursor-pointer;
@@ -168,4 +168,7 @@ label {
 
 .IconBottom {
   @apply absolute bottom-2 right-2 bg-gray-100 hover:bg-gray-200    text-zinc-600 hover:text-zinc-700 p-2 rounded-full cursor-pointer;
+}
+.CallIcons {
+  @apply bg-gray-50 text-black p-1 rounded-md hover:bg-zinc-900 hover:text-white bg-opacity-40;
 }
