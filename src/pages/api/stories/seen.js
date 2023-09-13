@@ -14,10 +14,21 @@ const seen = (req, res) => {
             id: StoryId,
           },
           data: {
-            SeenUsersIds: userId,
+            SeenUsers: {
+              connect: {
+                id: userId,
+              },
+            },
           },
           include: {
-            SeenUsers: true,
+            SeenUsers: {
+              select: {
+                id: true,
+                Name: true,
+                image: true,
+                about: true,
+              },
+            },
           },
         });
         res.send(seenStory);

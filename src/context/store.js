@@ -30,6 +30,8 @@ export const state = create((set) => ({
 }));
 
 export const modal = create((set) => ({
+  currentImage: null,
+  setCurrentImage: (value) => set(() => ({ currentImage: value })),
   image: false,
   setImage: (value) => set({ image: value }),
   Account: false,

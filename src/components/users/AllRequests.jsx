@@ -4,6 +4,7 @@ import { HiUserAdd } from "react-icons/hi";
 import { AiOutlineCloseCircle } from "react-icons/ai";
 import { User } from "../../containers";
 import axios from "axios";
+import Request from "../user/Request";
 
 const AllRequests = () => {
   const [allRequests, setAllRequests] = useState([]);
@@ -18,15 +19,6 @@ const AllRequests = () => {
     fetchRequests();
   }, []);
 
-  const response = async (senderId, status) => {
-    const res = await axios.post("/api/friends/Response", {
-      recieverId: user.id,
-      senderId,
-      status,
-    });
-    fetchRequests();
-  };
-
   return (
     <div className="w-full h-full p-2">
       <div className="w-full h-fit flex justify-between items-center p-2">
@@ -37,7 +29,7 @@ const AllRequests = () => {
           </div>
           <HiUserAdd
             className="btn w-fit"
-            size={32}
+            size={35}
             onClick={() => {
               setAddFriends(true);
               setRequests(false);
@@ -45,43 +37,13 @@ const AllRequests = () => {
           />
         </div>
       </div>
-      {allRequests.length !== 0}
-      {
+      {allRequests.length !== 0 && (
         <div className="users">
           {allRequests?.map((request) => (
-            <User
-              key={request.id + "reequest"}
-              name={request.Sender.Name}
-              image={request.Sender.image}
-              status={
-                request.Sender.about ? request.Sender.about : "Hey how are you!"
-              }
-              icon={
-                <div className="flex justify-center items-center gap-2">
-                  <AiOutlineCloseCircle
-                    title="reject"
-                    size={30}
-                    className="btn p-1"
-                    onClick={() => response(request.SenderId, "reject")}
-                  />
-                  <div
-                    className="btn w-fit py-[0.2rem] text-base font-thin"
-                    onClick={() => response(request.SenderId, "block")}
-                  >
-                    Block
-                  </div>
-                  <div
-                    className="btn w-fit py-[0.2rem] text-base font-thin"
-                    onClick={() => response(request.Sender.id, "accept")}
-                  >
-                    Accept
-                  </div>
-                </div>
-              }
-            />
+            <Request RequestUser={request.Sender} refresh={fetchRequests} />
           ))}
         </div>
-      }
+      )}
       {allRequests.length === 0 && (
         <div className="w-full h-full flex justify-center flex-col items-center gap-2 overflow-y-scroll">
           <div className="heading_1">You Have No Requests .</div>

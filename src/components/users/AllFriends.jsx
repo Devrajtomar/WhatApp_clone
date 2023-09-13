@@ -24,42 +24,42 @@ const AllFriends = () => {
   };
 
   return (
-    <div className="w-full h-full p-2">
+    <div className="w-full h-full">
       <div className="w-full h-fit flex justify-between items-center p-2">
         <div className="heading_2">Friends</div>
         <div className="FlexCenter gap-2">
           <div className="btn p-2 w-fit" onClick={() => setFriends(false)}>
             BACK
           </div>
-          <HiUserAdd
+          <div
             className="btn w-fit"
             size={32}
             onClick={() => {
-              setAddFriends(true);
+              setRequests(true);
               setFriends(false);
             }}
-          />
+          >
+            Requests
+          </div>
         </div>
       </div>
       {user.friends.length !== 0 && (
         <div className="users">
           {user.friends.map((friend) => (
-            <div className="w-full h-full">
-              <User
-                key={friend.id + "freind"}
-                id={friend.id}
-                name={friend.Name}
-                status={
-                  friend.about !== null
-                    ? friend.about
-                    : "Hey i'am using messanger!"
-                }
-                image={friend.image}
-                icon={<HiChatAlt2 />}
-                NameClick={() => NameClick(friend)}
-                IconClick={() => IconClick(friend)}
-              />
-            </div>
+            <User
+              key={`Friend"+${friend.id} + "Freinds Id`}
+              id={friend.id}
+              name={friend.Name}
+              status={
+                friend.about !== null
+                  ? friend.about
+                  : "Hey i'am using messanger!"
+              }
+              image={friend.image}
+              icon={<HiChatAlt2 />}
+              NameClick={() => NameClick(friend)}
+              IconClick={() => IconClick(friend)}
+            />
           ))}
         </div>
       )}

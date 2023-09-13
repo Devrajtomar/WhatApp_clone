@@ -32,8 +32,8 @@ const Chats = () => {
     getChats();
   }, [user]);
   return (
-    <div className="w-full h-full flex justify-start flex-col items-start gap-2 relative overflow-y-scroll">
-      <div className="w-full h-fit flex justify-between items-center p-2">
+    <div className="w-full h-full flex justify-start flex-col items-start md:gap-2 mt-2 relative overflow-y-scroll">
+      <div className="w-full h-fit flex justify-between items-center p-1">
         <div className="heading_2">Messages</div>
         <AiOutlineUsergroupAdd
           className="btn_ min-w-[60px] p-0  rounded-sm"
@@ -55,7 +55,7 @@ const Chats = () => {
       />
       {conversations.length === 0 && (
         <div className="w-full h-full flex justify-center items-center flex-col gap-2">
-          <div className="text-3xl font-semibold text-center font-serif">
+          <div className="text-lg md:text-2xl font-semibold text-center">
             No conversations yet! Start a conversation
           </div>
           <div className="btn" onClick={() => setFriends(true)}>

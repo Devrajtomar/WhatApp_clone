@@ -1,4 +1,5 @@
 @import url("https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400;1,500;1,600;1,700;1,800&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@100&family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap");
 
 @tailwind base;
 @tailwind components;
@@ -6,7 +7,7 @@
 
 * {
   line-height: 1;
-  font-family: "Open Sans";
+  font-family: "Ubuntu", "Montserrat", "Open Sans";
   transition: 0.1s;
   @apply p-0 m-0 transition select-none;
 }
@@ -56,7 +57,7 @@ input {
   color: transparent;
 }
 .btn {
-  @apply bg-zinc-500 hover:bg-zinc-700 text-white font-bold py-2 px-4 rounded focus:outline-none transform transition hover:scale-105 cursor-pointer;
+  @apply bg-zinc-500 hover:bg-zinc-700 text-white font-bold py-2 px-4 rounded focus:outline-none transform transition hover:scale-105 cursor-pointer text-sm;
 }
 .btn_ {
   @apply bg-zinc-500 hover:bg-zinc-700 text-white font-bold focus:outline-none transform transition hover:scale-105;
@@ -122,30 +123,30 @@ label {
 .SideBar {
   @apply h-full fixed md:relative top-0 left-0 flex gap-0.5 justify-start items-start  bg-zinc-400 w-full sm:min-w-[350px] lg:w-2/3 overflow-y-scroll z-[999];
 }
-.sidebar_icons {
-  @apply md:w-fit w-full bg-white h-fit md:min-h-screen fixed top-0 left-0 flex items-center md:pb-4 justify-evenly md:justify-between md:flex-col text-lg font-semibold;
-}
 .SideBar_icons {
-  @apply md:w-fit w-full px-1 bg-white h-fit mt-3 md:mt-0 flex justify-evenly md:justify-start md:flex-col gap-2 font-semibold mb-1;
+  @apply w-full md:w-fit bg-white h-fit md:min-h-screen fixed top-0 left-0 flex items-center md:pb-4 px-2 py-1 md:px-0 justify-evenly md:justify-start gap-1 md:flex-col text-base font-semibold z-20;
+}
+.SideBar_icons > div {
+  @apply w-full;
 }
 .page {
   @apply fixed md:relative right-0 top-0 w-full h-full z-10;
 }
 .page_icons {
-  @apply flex justify-center items-center py-1 px-2 md:py-1 md:px-0 gap-1 rounded-md flex-row md:flex-col bg-white text-black hover:bg-black hover:text-white cursor-pointer;
+  @apply flex justify-center items-center px-2 py-1 gap-1 rounded-md flex-row md:flex-col bg-white text-black hover:bg-black hover:text-white cursor-pointer w-full;
 }
 .selected_Icon {
-  @apply flex justify-center items-center py-1 px-2 md:p-1 gap-1 rounded-md flex-row md:flex-col bg-black text-white hover:bg-black hover:text-white cursor-pointer;
+  @apply flex justify-center items-center py-1 px-2 md:p-1 gap-1 rounded-md flex-row md:flex-col bg-black text-white hover:bg-black hover:text-white cursor-pointer w-full;
 }
 
 .SideBar_Menu {
-  @apply md:pl-20  pt-20 md:pt-2 flex flex-col justify-start items-end w-full h-full;
+  @apply md:pl-20  pt-10 md:pt-2 flex flex-col justify-start items-end w-screen sm:w-full h-full relative z-10;
 }
 .users {
-  @apply flex flex-col gap-3 items-end sm:items-start justify-start pt-2 p-1 sm:px-2 w-full min-w-[350px];
+  @apply flex flex-col md:gap-2 md:items-end items-center justify-start md:pt-2 px-1 w-full min-w-[300px] max-h-full overflow-y-scroll;
 }
 .user {
-  @apply p-2 bg-gray-100  rounded-full w-full hover:bg-zinc-300 cursor-pointer flex items-center justify-center gap-2;
+  @apply p-1 bg-gray-100  rounded-md w-full hover:bg-zinc-300 cursor-pointer flex items-center justify-center gap-1 sm:gap-2 scale-y-90;
 }
 .user .icon {
   @apply rounded-lg text-3xl mx-2 bg-gray-300 hover:bg-white;
@@ -169,6 +170,6 @@ label {
 .IconBottom {
   @apply absolute bottom-2 right-2 bg-gray-100 hover:bg-gray-200    text-zinc-600 hover:text-zinc-700 p-2 rounded-full cursor-pointer;
 }
-.CallIcons {
-  @apply bg-gray-50 text-black p-1 rounded-md hover:bg-zinc-900 hover:text-white bg-opacity-40;
+.CallIcon {
+  @apply bg-gray-300 text-zinc-800 p-1 hover:bg-zinc-900 hover:text-white bg-opacity-40 rounded-sm cursor-pointer;
 }

@@ -5,12 +5,12 @@ import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { toast } from "react-hot-toast";
 
-import { SideBar } from "../components/navigation";
-import { ChatSpace, CallsSpace, Stories, Modal } from "../components/main";
-import { Loading } from "../containers";
+import { SideBar } from "@/components/navigation";
+import { ChatSpace, CallsSpace, Stories, Modal } from "@/components/main";
+import { Loading } from "@/containers";
 import { state } from "@/context/store";
-import "../styles/jitsi.css";
-import Scripts from "../scripts";
+import "@/styles/jitsi.css";
+import Scripts from "@/scripts";
 
 const Page = () => {
   const { setUser } = state();

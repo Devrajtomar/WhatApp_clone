@@ -1,16 +1,13 @@
 import React, { useEffect, useState } from "react";
 import Story from "../user/Story";
-import { GiMusicSpell } from "react-icons/gi";
 import { modal, state } from "../../context/store";
-import { User } from "@/containers";
-import { BsThreeDotsVertical } from "react-icons/bs";
 import axios from "axios";
-import { MdHistory } from "react-icons/md";
+import { MdHistory, MdScreenShare } from "react-icons/md";
 
 const Stories = () => {
   const { user } = state();
   const [AllStories, setAllStories] = useState([]);
-
+  const { setNewStory } = modal();
   const GetStories = async () => {
     const res = await axios.post("/api/stories/AllStories", {
       user: user,
@@ -22,7 +19,12 @@ const Stories = () => {
   }, []);
   return (
     <div className="users">
-      <div className="w-full h-fit flex justify-between items-center p-2">
+      <MdScreenShare
+        size={50}
+        className="IconBottom"
+        onClick={() => setNewStory(true)}
+      />
+      <div className="w-full h-fit flex justify-between items-center p-1 mt-2">
         <div className="heading_2">Stories</div>
         <MdHistory className="btn_ min-w-[60px] p-0  rounded-sm" size={30} />
       </div>

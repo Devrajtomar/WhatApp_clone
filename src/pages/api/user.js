@@ -23,6 +23,7 @@ const handler = (req, res) => {
               Email: true,
               Name: true,
               image: true,
+              about: true,
               seenMessages: true,
               conversations: true,
               messages: true,
@@ -31,6 +32,7 @@ const handler = (req, res) => {
               friends: true,
               seenStories: true,
               Stories: true,
+              Calls: true,
             },
           });
           res.send(data);

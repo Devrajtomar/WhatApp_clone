@@ -33,7 +33,6 @@ const handler = async (req, res) => {
           messages: true,
         },
       });
-      console.log(response);
       if (response.length !== 0) {
         res.send(response[0]);
       } else {

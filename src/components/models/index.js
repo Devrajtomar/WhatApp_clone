@@ -3,6 +3,7 @@ import AccountModal from "./AccountModal.jsx";
 import ChatSettingModal from "./ChatSettingModal.jsx";
 import UserSettingsModal from "./UserSettingsModal.jsx";
 import NewGroupModal from "./NewGroupModal.jsx";
+import NewStoryModal from "./NewStoryModal.jsx";
 
 export {
   ImageModal,
@@ -10,4 +11,5 @@ export {
   ChatSettingModal,
   UserSettingsModal,
   NewGroupModal,
+  NewStoryModal,
 };

@@ -19,7 +19,7 @@ const Story = ({ User }) => {
     }
   };
   const LastStory = User.Stories[User.Stories.length - 1];
-  const isSelected = currentStoryUser?.id === User.Id ? true : false;
+  const isSelected = currentStoryUser?.id === User.id ? true : false;
   return (
     <div
       className="user"

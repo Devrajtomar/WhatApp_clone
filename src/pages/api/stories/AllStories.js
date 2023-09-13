@@ -18,6 +18,7 @@ const handler = async (req, res) => {
               id: true,
               Name: true,
               image: true,
+              about: true,
               Stories: true,
             },
           },

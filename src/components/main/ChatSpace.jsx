@@ -111,31 +111,27 @@ const ChatSpace = () => {
       <div className="bg-gradient w-full text-white z-20 p-2 flex justify-between items-center gap-2 ">
         <div className="flex justify-start items-center gap-2 ">
           <HiChevronLeft
-            size={40}
+            size={35}
             className={`cursor-pointer hover:scale-105 ${
               isOpen ? "hidden" : ""
             }`}
             onClick={() => setIsOpen(true)}
           />
-          <Image
-            width="60"
-            height="60"
+          <img
             alt="Default"
-            className="rounded-full h-[60px] w-[60px]"
-            src={
-              currentChatUser.image === null
-                ? "/DefaultUser.jpg"
-                : currentChatUser.image
-            }
+            className="rounded-full h-[50px] w-[50px]"
+            src={currentChatUser.image}
           />
           <div
-            className="flex justify-center items-start gap-1 flex-col "
+            className="flex justify-center items-start md:gap-1 flex-col "
             onClick={() => setAccount(true)}
           >
-            <div className="text-xl uppercase font-bold text-white">
+            <div className="text-base md:text-xl uppercase font-bold text-white">
               {currentChatUser.Name}
             </div>
-            <div className="text-base text-zinc-200">{lastSeen}</div>
+            <div className="text-sm  md:text-base text-zinc-200">
+              {lastSeen}
+            </div>
           </div>
         </div>
         <BsThreeDotsVertical

@@ -18,7 +18,7 @@ const StoriesMain = () => {
   return (
     <div className="page">
       <div className="w-full h-full md:min-w-[600px] text-white flex justify-center items-center">
-        <div className="w-full h-full bg-black rounded-md relative">
+        <div className="w-full h-full bg-black relative">
           <div className="w-full flex justify-between items-center bg-transparent absolute top-1 left-0 p-1 z-[999]">
             <div className="flex-grow flex justify-start items-center gap-2.5">
               <BsArrowLeft
@@ -31,15 +31,13 @@ const StoriesMain = () => {
                 }}
               />
               {currentStoryUser.image ? (
-                <Image
+                <img
                   src={
                     currentStoryUser.image
                       ? currentStoryUser.image
                       : "/DefaultUser.jpg"
                   }
                   alt={currentStoryUser.Name}
-                  height="40"
-                  width="40"
                   className="rounded-full object-cover h-[50px] w-[50px]"
                   //onClick={() => setImage(true)}
                 />

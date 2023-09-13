@@ -15,9 +15,9 @@ model User {
   Name                String?
   Email               String?   @unique
   EmailVerified       DateTime?
-  about               String?
+  about               String @default("Hey i'm using messenger!")
   loginToken          String?
-  image               String?
+  image               String @default("https://res-console.cloudinary.com/messengermessenger/thumbnails/transform/v1/image/upload/Y19saW1pdCxoXzE2MDAsd18xNjAwLGZfanBnLGZsX2xvc3N5LmFueV9mb3JtYXQucHJlc2VydmVfdHJhbnNwYXJlbmN5LnByb2dyZXNzaXZl/v1/cnN1eWxpbnc2Y2ZnaW9weGRuYno=/template_primary")
   hashedPassword      String?
   createdAt           DateTime @default(now())
   updatedAt           DateTime @updatedAt
@@ -30,11 +30,12 @@ model User {
   seenStoriesIds      String[] @db.ObjectId
   seenStories         Story[] @relation("Seen",fields: [seenStoriesIds], references: [id])
 
-  RecievedRequestIds  String[] @db.ObjectId
   RecievedRequests    Request[] @relation("Recieved")
-  SendRequestIds      String[] @db.ObjectId
   SendRequests        Request[] @relation("Sent")
 
+
+  callIds             String[] @db.ObjectId
+  Calls               Call[] @relation(fields: [callIds],references: [id])
   Stories             Story[]
   accounts            Account[]
   messages            Message[]
@@ -120,4 +121,18 @@ model Account {
   user               User @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@unique([provider, providerAccountId])
+}
+
+
+
+model Call {
+    id                 String @id @default(auto()) @map("_id") @db.ObjectId
+    userIds            String[] @db.ObjectId
+    users              User[] @relation(fields: [userIds],references: [id])
+    type               String
+    status             String @default("pending")
+    token              String
+    isRecorded         Boolean @default(false)
+    VideoUrl           String?
+    
 }
