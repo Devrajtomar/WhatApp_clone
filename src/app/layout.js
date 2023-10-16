@@ -1,4 +1,5 @@
 import "./globals.css";
+import { SocketProvider } from "../providers/socket-provider";
 import ErrorContext from "../context/errorhandler";
 export const metadata = {
   title: "Messanger",
@@ -11,8 +12,10 @@ export default function RootLayout({ children }) {
         <script src="https://meet.jit.si/external_api.js"></script>
       </head>
       <body id="body">
-        <ErrorContext />
-        {children}
+        <SocketProvider>
+          <ErrorContext />
+          {children}
+        </SocketProvider>
       </body>
     </html>
   );

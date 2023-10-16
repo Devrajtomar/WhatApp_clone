@@ -7,7 +7,7 @@ import { LogOut } from "../navigation";
 import Title from "./components/Title";
 
 const UserSettingsModal = () => {
-  const { setImage } = modal();
+  const { setImage, setUserSetting } = modal();
 
   const { user } = state();
 
@@ -65,7 +65,10 @@ const UserSettingsModal = () => {
           </label>
           <div
             className="font-semibold text-lg text-blue-600 hover:text-blue-500 cursor-pointer"
-            onClick={() => setImage(true)}
+            onClick={() => {
+              setImage(true);
+              setUserSetting(false);
+            }}
           >
             Preview
           </div>

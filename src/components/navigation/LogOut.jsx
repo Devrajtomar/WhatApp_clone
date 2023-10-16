@@ -8,8 +8,8 @@ const LogOut = () => {
   };
   return (
     <div className="page_icons" onClick={handleLogOut}>
-      <HiArrowLeftOnRectangle className="text-2xl md:text-3xl" />
-      <div>LogOut</div>
+      <HiArrowLeftOnRectangle className="text-2xl" />
+      <div className="md:hidden">LogOut</div>
     </div>
   );
 };

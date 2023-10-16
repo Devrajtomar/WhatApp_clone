@@ -16,6 +16,8 @@ import {
 } from "../users";
 import { modal, state } from "../../context/store";
 import axios from "axios";
+import { BsThreeDots, BsThreeDotsVertical } from "react-icons/bs";
+import { MdSettings } from "react-icons/md";
 const SideBar = ({ selectedTab, setSelectedTab }) => {
   const { setUserSetting } = modal();
   const { user, isOpen, setIsOpen, Friends, addFriends, Requests } = state();
@@ -24,8 +26,11 @@ const SideBar = ({ selectedTab, setSelectedTab }) => {
     return (
       <div className="SideBar">
         <div className="SideBar_icons">
-          <div className=" justify-center items-center p-1 gap-1 flex-col hidden md:flex">
-            <HiOutlineMenu className="icon" onClick={() => setIsOpen(false)} />
+          <div className=" p-1 ">
+            <MdSettings
+              className="text-2xl hover:scale-105 hover:text-zinc-700"
+              onClick={() => setUserSetting(true)}
+            />
           </div>
           <div>
             <div
@@ -37,7 +42,7 @@ const SideBar = ({ selectedTab, setSelectedTab }) => {
               }}
             >
               <HiChatBubbleBottomCenter className="text-2xl" />
-              <div>Chat</div>
+              <div className="md:hidden">Chat</div>
             </div>
             {selectedTab === "Chat" && (
               <div className="w-full h-1 bg-zinc-800 rounded-sm" />
@@ -51,7 +56,7 @@ const SideBar = ({ selectedTab, setSelectedTab }) => {
               onClick={() => setSelectedTab("Stories")}
             >
               <AiFillPlaySquare className="text-2xl" />
-              <div>Stories</div>
+              <div className="md:hidden">Stories</div>
             </div>
             {selectedTab === "Stories" && (
               <div className="w-full h-1 bg-zinc-800 rounded-sm" />
@@ -67,22 +72,14 @@ const SideBar = ({ selectedTab, setSelectedTab }) => {
               }}
             >
               <HiPhone className="text-2xl" />
-              <div>Calls</div>
+              <div className="md:hidden">Calls</div>
             </div>
             {selectedTab === "Calls" && (
               <div className="w-full h-1 bg-zinc-800 rounded-sm" />
             )}
           </div>
-          <div className="relative self-center justify-self-end hidden sm:block">
-            {/* <div className="bg-green-300 border border-white absolute top-0.5 right-0.5 w-5 h-5 rounded-full" /> */}
-            <Image
-              width="60"
-              height="60"
-              alt="Default"
-              className="rounded-full md:h-[60px] md:w-[60px] sm:w-[40px] sm:h-[40px] sm:mr-3 m-1 hidden sm:block"
-              src={user.image}
-              onClick={() => setUserSetting(true)}
-            />
+          <div className="relative self-center justify-self-end hidden sm:block mt-auto">
+            <LogOut />
           </div>
         </div>
         <div className="SideBar_Menu">

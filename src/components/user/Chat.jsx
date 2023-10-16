@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { HiChatAlt2 } from "react-icons/hi";
 import { state } from "@/context/store";
-import { PusherCl } from "@/lib/pusher";
 import { User } from "@/containers";
 
 const Chat = ({ conversation }) => {
@@ -12,10 +11,7 @@ const Chat = ({ conversation }) => {
   const users = conversation.users.filter((user_) => user_.id !== user.id);
   const name = users.length >= 2 ? conversation.name : users[0].Name;
   const image = users.length > 1 ? conversation.image : users[0].image;
-  useEffect(() => {
-    const pusher = PusherCl.subscribe(conversation.id);
-    pusher.bind("message:new", (message) => setLastMessage(message));
-  }, [lastMessage]);
+
   const NameClick = () => {
     setIsOpen(window.innerWidth <= 800 ? false : true);
     setChatUser(users.length > 1 ? conversation : users[0]);

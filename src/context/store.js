@@ -23,7 +23,7 @@ export const state = create((set) => ({
     set(() => ({
       addFriends: value,
     })),
-  currentChatUser: "",
+  currentChatUser: null,
   setChatUser: (value) => set(() => ({ currentChatUser: value })),
   currentStoryUser: "",
   setStoryUser: (value) => set(() => ({ currentStoryUser: value })),

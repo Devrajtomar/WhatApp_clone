@@ -5,7 +5,7 @@ import { modal, state } from "../context/store";
 const User = ({ id, name, image, status, icon, NameClick, IconClick }) => {
   const { currentChatUser } = state();
   const { setImage } = modal();
-  const isSelected = currentChatUser.id === id ? true : false;
+  const isSelected = currentChatUser?.id === id ? true : false;
 
   return (
     <div

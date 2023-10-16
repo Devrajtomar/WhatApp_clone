@@ -1,113 +1,79 @@
 import React, { useEffect, useRef, useState } from "react";
-import axios from "axios";
-import Image from "next/image";
-import { formatDistanceToNow, subDays } from "date-fns";
+import { useSocket } from "../../providers/socket-provider";
+import seen from "../../utils/seen";
 import { modal, state } from "../../context/store";
 import { BsThreeDotsVertical } from "react-icons/bs";
 import { Recieve, Send } from "../../containers";
 import { HiHand, HiMicrophone } from "react-icons/hi";
 import { HiChevronLeft, HiDocument } from "react-icons/hi2";
-import { PusherCl } from "@/lib/pusher";
+import getConversation from "../../utils/conversation";
+import { DotPulse } from "@uiball/loaders";
+import newMessage from "../../utils/newmessage";
+import Empty from "../Empty/Empty";
+import ChatSocket from "@/utils/chat-socket";
+
 const ChatSpace = () => {
   // constant states
-
+  const { socket } = useSocket();
   const { user, currentChatUser, isOpen, setIsOpen } = state();
   const [message, setMessage] = useState("");
   const [conversation, setConversation] = useState([]);
-  const [conversationId, setConversationId] = useState("");
+  const [conversationId, setConversationId] = useState(null);
   const [isSending, setIsSending] = useState(false);
-  const [isSent, setIsSent] = useState(false);
-
-  const lastSeen =
-    currentChatUser !== "" &&
-    formatDistanceToNow(
-      subDays(new Date(currentChatUser.updatedAt), 0),
-      new Date(),
-      { addSuffix: true },
-    );
-
-  // constant states
-
-  //hooks
   const { setChatSetting, setAccount } = modal();
   const chatContainerRef = useRef(null);
-  //hooks
-  //updatings states
-  const getConversation = async () => {
-    if (currentChatUser.id) {
-      const anotherUser = currentChatUser.id;
-      const userId = user.id;
-      const res = await axios.post("/api/conversations/conversation", {
-        userId,
-        anotherUser,
+
+  ChatSocket({
+    key: `new message ${conversationId}`,
+    setAfter: setConversation,
+  });
+
+  useEffect(() => {
+    if (currentChatUser !== null) {
+      getConversation({
+        userId: user.id,
+        otheruserId: currentChatUser.id,
+        setId: setConversationId,
+        setChats: setConversation,
       });
-      if (res) {
-        const messages = await res.data.messages;
-        const id = await res.data.id;
-        setConversationId(id);
-        setConversation(messages || []);
-      }
     }
-  };
-  const hendleNewMessage = (message) => {
-    setConversation((current) => [...current, message]);
-    getConversation();
-  };
+  }, [currentChatUser]);
+
   const scrollToBottom = () => {
     if (chatContainerRef.current) {
       chatContainerRef.current.scrollTop =
         chatContainerRef.current.scrollHeight;
     }
   };
+
   const SendMessage = async (e) => {
     e.preventDefault();
     setIsSending(true);
-    setMessage("");
-    if (conversationId !== "") {
-      console.log(conversationId);
-      const res = await axios.post("/api/conversations/messages", {
-        message,
-        senderId: user.id,
-        conversationId,
-      });
-      if (res.status === 200) {
-        setIsSent(true);
-        return setTimeout(() => {
-          setIsSending(false);
-          setIsSent(false);
-        }, 1500);
-      }
+    const res = await newMessage({
+      senderId: user.id,
+      message,
+      conversationId,
+    });
+
+    if (res) {
+      setIsSending(false);
     }
   };
+
   //updatings states
 
   //useEffects
-  useEffect(() => {
-    getConversation();
-  }, [currentChatUser]);
-  useEffect(() => {
-    if (conversationId) {
-      const pusher = PusherCl.subscribe(conversationId);
-      pusher.bind("message:new", hendleNewMessage);
-    }
-  }, [currentChatUser, conversationId]);
+
   useEffect(() => {
     scrollToBottom();
   }, [conversation]);
   //useEffects
 
-  //conversations
-  if (currentChatUser === "") {
-    return (
-      <div className="page">
-        <div className="text-2xl font-semibold font-serif h-full w-full flex justify-center items-center  text-center">
-          SELECT A CHAT OR START NEW CONVERSATION
-        </div>
-      </div>
-    );
+  if (currentChatUser === null) {
+    return <Empty text="select a chat or start new conversation" />;
   }
   return (
-    <div className="page flex flex-col py-3 md:pb-5">
+    <div className="page flex flex-col ">
       <div className="bg-gradient w-full text-white z-20 p-2 flex justify-between items-center gap-2 ">
         <div className="flex justify-start items-center gap-2 ">
           <HiChevronLeft
@@ -130,7 +96,7 @@ const ChatSpace = () => {
               {currentChatUser.Name}
             </div>
             <div className="text-sm  md:text-base text-zinc-200">
-              {lastSeen}
+              {seen(currentChatUser.updatedAt)}
             </div>
           </div>
         </div>
@@ -163,8 +129,8 @@ const ChatSpace = () => {
       <div className="relative">
         {isSending && (
           <div className="bg-transparent text-sm absolute -top-10 w-full  p-1 ">
-            <div className=" bg-zinc-200 w-fit mx-auto p-2 rounded-full">
-              {isSent ? "Sent" : "Sending..."}
+            <div className=" w-fit mx-auto">
+              <DotPulse size={20} speed={1} color="black" />
             </div>
           </div>
         )}

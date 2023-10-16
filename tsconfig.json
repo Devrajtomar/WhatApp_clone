@@ -30,7 +30,8 @@
     "**/*.ts",
     "**/*.tsx",
     ".next/types/**/*.ts",
-    "src/lib/pusher.js"
+    "src/lib/pusher.js",
+    "src/pages/api/socket/newmessage.js"
   ],
   "exclude": ["node_modules"]
 }

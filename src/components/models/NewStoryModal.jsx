@@ -26,7 +26,7 @@ const NewStoryModal = () => {
 
   const handelFileChange = (e) => {
     setSelectedFile(e.target.files[0]);
-    if (selectedFile !== null && selectedFile) {
+    if (selectedFile !== null) {
       const reader = new FileReader();
 
       reader.onload = (e) => {
@@ -47,9 +47,7 @@ const NewStoryModal = () => {
             className="flex justify-center items-center text-xl flex-col gap-1 bg-zinc-200 min-w-[320px] md:min-w-[400px] min-h-[500px] h-full rounded-sm hover:border-1 border-zinc-300 "
           >
             <HiOutlineCamera />
-            <div>
-              {preview !== null && preview ? "Change Story" : "Create Story"}
-            </div>
+            <div>{preview !== null ? "Change Story" : "Create Story"}</div>
           </label>
           <input
             type="file"
@@ -70,7 +68,7 @@ const NewStoryModal = () => {
                 className="flex justify-center items-center text-xl flex-col gap-1 bg-zinc-200 min-w-[320px] md:min-h-[400px] min-h-[300px] rounded-sm hover:border-1 border-zinc-300 p-1 max-w-[400px] max-h-[400px] object-contain"
               />
             )}
-            {selectedFile !== null && selectedFile && (
+            {selectedFile !== null && (
               <div className="btn w-full py-1 px-4 text-2xl" onClick={newStory}>
                 Post Story
               </div>

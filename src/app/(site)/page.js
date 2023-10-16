@@ -7,17 +7,16 @@ import { toast } from "react-hot-toast";
 
 import { SideBar } from "@/components/navigation";
 import { ChatSpace, CallsSpace, Stories, Modal } from "@/components/main";
-import { Loading } from "@/containers";
+import { Logo } from "@/containers";
 import { state } from "@/context/store";
-import "@/styles/jitsi.css";
-import Scripts from "@/scripts";
+import { useSocket } from "@/providers/socket-provider";
 
 const Page = () => {
-  const { setUser } = state();
+  const { setUser, user } = state();
+  const { isConnected, socket } = useSocket();
   const [selectedTab, setSelectedTab] = useState("Chat");
   const router = useRouter();
   const [data, setData] = useState(null);
-  Scripts();
 
   let token = "";
   if (typeof window !== "undefined") {
@@ -53,10 +52,14 @@ const Page = () => {
       router.push("/login");
     }
   }, [token, router]);
-
   if (!data) {
-    return <Loading />;
+    return (
+      <div className="w-screen h-screen FlexCenter">
+        <Logo />
+      </div>
+    );
   }
+
   return (
     <div className="home">
       <SideBar setSelectedTab={setSelectedTab} selectedTab={selectedTab} />

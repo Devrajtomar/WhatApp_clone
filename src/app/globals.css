@@ -109,7 +109,7 @@ label {
   @apply font-medium text-base md:text-lg text-zinc-800;
 }
 .icon {
-  @apply p-1 rounded-sm bg-white hover:bg-zinc-300 cursor-pointer text-5xl;
+  @apply rounded-lg text-3xl mx-2 bg-gray-300 hover:bg-white p-1;
 }
 .loginForm {
   @apply bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 sm:min-w-[500px] min-w-full mt-8 text-xl relative;
@@ -133,14 +133,14 @@ label {
   @apply fixed md:relative right-0 top-0 w-full h-full z-10;
 }
 .page_icons {
-  @apply flex justify-center items-center px-2 py-1 gap-1 rounded-md flex-row md:flex-col bg-white text-black hover:bg-black hover:text-white cursor-pointer w-full;
+  @apply flex justify-center items-center px-2 py-1 gap-1   bg-white text-black hover:bg-black hover:text-white cursor-pointer w-full;
 }
 .selected_Icon {
-  @apply flex justify-center items-center py-1 px-2 md:p-1 gap-1 rounded-md flex-row md:flex-col bg-black text-white hover:bg-black hover:text-white cursor-pointer w-full;
+  @apply flex justify-center items-center  py-1 px-2 gap-1  bg-black text-white hover:bg-black hover:text-white cursor-pointer w-full;
 }
 
 .SideBar_Menu {
-  @apply md:pl-20  pt-10 md:pt-2 flex flex-col justify-start items-end w-screen sm:w-full h-full relative z-10;
+  @apply md:pl-10  pt-10 md:pt-0 flex flex-col justify-start items-end w-screen sm:w-full h-full relative z-10;
 }
 .users {
   @apply flex flex-col md:gap-2 md:items-end items-center justify-start md:pt-2 px-1 w-full min-w-[300px] max-h-full overflow-y-scroll;
@@ -148,9 +148,7 @@ label {
 .user {
   @apply p-1 bg-gray-100  rounded-md w-full hover:bg-zinc-300 cursor-pointer flex items-center justify-center gap-1 sm:gap-2 scale-y-90;
 }
-.user .icon {
-  @apply rounded-lg text-3xl mx-2 bg-gray-300 hover:bg-white;
-}
+
 .recieve {
   @apply w-[98%] flex gap-2 items-center justify-start;
 }
