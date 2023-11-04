@@ -1,5 +1,6 @@
 import "./globals.css";
 import { SocketProvider } from "../providers/socket-provider";
+import { PreviewProvider } from "../providers/Preview-Provider";
 import ErrorContext from "../context/errorhandler";
 export const metadata = {
   title: "Messanger",
@@ -13,8 +14,10 @@ export default function RootLayout({ children }) {
       </head>
       <body id="body">
         <SocketProvider>
-          <ErrorContext />
-          {children}
+          <PreviewProvider>
+            <ErrorContext />
+            {children}
+          </PreviewProvider>
         </SocketProvider>
       </body>
     </html>

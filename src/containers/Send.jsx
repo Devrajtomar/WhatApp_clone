@@ -5,7 +5,7 @@ import React from "react";
 const Send = ({ message }) => {
   return (
     <div className="send">
-      <div className="time">{format(new Date(message.createdAt), "p")}</div>
+      <div className="time">{format(new Date(message?.createdAt), "p")}</div>
       <div className="bg-blue-300 message_">{message.body}</div>
       <div className="flex items-center justify-center w-10 h-10 rounded-b-full rounded-r-full -rotate-45 bg-blue-300">
         <Image

@@ -5,10 +5,11 @@ import axios from "axios";
 import toast from "react-hot-toast";
 import { LogOut } from "../navigation";
 import Title from "./components/Title";
+import { usePreview } from "../../providers/Preview-Provider";
 
 const UserSettingsModal = () => {
   const { setImage, setUserSetting } = modal();
-
+  const { setPreviewSrc } = usePreview();
   const { user } = state();
 
   const [name, setName] = useState(user.Name);
@@ -68,6 +69,7 @@ const UserSettingsModal = () => {
             onClick={() => {
               setImage(true);
               setUserSetting(false);
+              setPreviewSrc(newImagePreview);
             }}
           >
             Preview

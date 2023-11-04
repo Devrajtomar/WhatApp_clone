@@ -26,15 +26,13 @@ const NewStoryModal = () => {
 
   const handelFileChange = (e) => {
     setSelectedFile(e.target.files[0]);
-    if (selectedFile !== null) {
-      const reader = new FileReader();
+    const reader = new FileReader();
 
-      reader.onload = (e) => {
-        setPreview(e.target.result);
-      };
+    reader.onload = (e) => {
+      setPreview(e.target.result);
+    };
 
-      reader.readAsDataURL(e.target.files[0]);
-    }
+    reader.readAsDataURL(e.target.files[0]);
   };
 
   return (

@@ -72,7 +72,7 @@ const Modal = () => {
               leaveFrom="opacity-100 scale-100"
               leaveTo="opacity-0 scale-95"
             >
-              <Dialog.Panel className="w-screen h-screen md:min-h-[400px] md:max-h-[80vh] md:max-w-xl md:min-w-[400px] transform overflow-scroll bg-white p-3 text-left align-top shadow-xl transition-all">
+              <Dialog.Panel className="w-screen h-screen md:min-h-[400px] md:max-h-[90vh] md:max-w-fit md:min-w-[400px] transform overflow-scroll bg-white p-3 text-left align-top shadow-xl transition-all">
                 <div className="w-full h-full">
                   {image && <ImageModal data={""} />}
                   {Account && <AccountModal data={""} />}

@@ -32,7 +32,7 @@ const Title = ({ title, onClose }) => {
         <AiOutlineCloseCircle
           size={27}
           onClick={handelClose}
-          className="hover:bg-white hover:text-black hover:scale-105 cursor-pointer"
+          className=" hover:scale-105 cursor-pointer bg-transparent"
         />
       </div>
     </Dialog.Title>

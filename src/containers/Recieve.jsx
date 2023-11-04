@@ -14,7 +14,7 @@ const Recieve = ({ message }) => {
         />
       </div>
       <div className="bg-green-400 message_">{message.body}</div>
-      <div className="time">{format(new Date(message.createdAt), "p")}</div>
+      <div className="time">{format(new Date(message?.createdAt), "p")}</div>
     </div>
   );
 };
